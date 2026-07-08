@@ -71,18 +71,16 @@ export default function App() {
     }));
   };
 
+  if (step.type === "landing") {
+    return <LandingPage onStart={goNext} />;
+  }
+
   return (
     <div className="relative mx-auto flex h-svh max-w-md flex-col overflow-hidden bg-bg">
       <AnimatePresence initial={false} custom={direction}>
         {step.type === "splash" && (
           <ScreenShell key="splash" noPad direction={direction}>
             <Splash onDone={goNext} />
-          </ScreenShell>
-        )}
-
-        {step.type === "landing" && (
-          <ScreenShell key="landing" noPad direction={direction}>
-            <LandingPage onStart={goNext} />
           </ScreenShell>
         )}
 
