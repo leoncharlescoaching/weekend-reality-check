@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -13,8 +12,6 @@ import {
 /* ------------------------------------------------------------------ */
 /*  Shared config                                                      */
 /* ------------------------------------------------------------------ */
-
-const REALITY_CHECK_ROUTE = "/reality-check";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -128,16 +125,15 @@ const steps = [
 /*  Page                                                                */
 /* ------------------------------------------------------------------ */
 
-export default function LandingPage() {
-  const navigate = useNavigate();
-
-  const goToRealityCheck = () => navigate(REALITY_CHECK_ROUTE);
+export default function LandingPage({ onStart }) {
+  const goToRealityCheck = () => {
+    if (onStart) {
+      onStart();
+    }
+  };
 
   return (
     <main className="min-h-screen w-full bg-neutral-950 text-neutral-100 antialiased">
-      {/* ============================================================ */}
-      {/* 1. HERO */}
-      {/* ============================================================ */}
       <Section className="pt-28 pb-20 sm:pt-36 sm:pb-28 lg:pt-44 lg:pb-32">
         <motion.div
           initial="hidden"
@@ -175,9 +171,6 @@ export default function LandingPage() {
         </motion.div>
       </Section>
 
-      {/* ============================================================ */}
-      {/* 2. THE PROBLEM */}
-      {/* ============================================================ */}
       <Section className="border-t border-neutral-900 py-20 sm:py-28">
         <motion.div
           initial="hidden"
@@ -216,9 +209,6 @@ export default function LandingPage() {
         </motion.div>
       </Section>
 
-      {/* ============================================================ */}
-      {/* 3. WHY THIS IS DIFFERENT */}
-      {/* ============================================================ */}
       <Section className="border-t border-neutral-900 py-20 sm:py-28">
         <motion.div
           initial="hidden"
@@ -260,9 +250,6 @@ export default function LandingPage() {
         </motion.div>
       </Section>
 
-      {/* ============================================================ */}
-      {/* 4. HERE'S EXACTLY WHAT YOU'LL GET */}
-      {/* ============================================================ */}
       <Section className="border-t border-neutral-900 py-20 sm:py-28">
         <motion.div
           initial="hidden"
@@ -277,8 +264,7 @@ export default function LandingPage() {
 
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
             These are real screens from the Weekend Reality Check™. No fake
-            examples. No stock images. This is exactly what you'll
-            experience.
+            examples. No stock images. This is exactly what you'll experience.
           </p>
 
           <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -307,9 +293,6 @@ export default function LandingPage() {
         </motion.div>
       </Section>
 
-      {/* ============================================================ */}
-      {/* 5. WHO THIS IS FOR */}
-      {/* ============================================================ */}
       <Section className="border-t border-neutral-900 py-20 sm:py-28">
         <motion.div
           initial="hidden"
@@ -348,9 +331,6 @@ export default function LandingPage() {
         </motion.div>
       </Section>
 
-      {/* ============================================================ */}
-      {/* 6. WHY THIS WORKS */}
-      {/* ============================================================ */}
       <Section className="border-t border-neutral-900 py-20 sm:py-28">
         <motion.div
           initial="hidden"
@@ -381,9 +361,6 @@ export default function LandingPage() {
         </motion.div>
       </Section>
 
-      {/* ============================================================ */}
-      {/* 7. WHAT HAPPENS NEXT */}
-      {/* ============================================================ */}
       <Section className="border-t border-neutral-900 py-20 sm:py-28">
         <motion.div
           initial="hidden"
@@ -427,9 +404,6 @@ export default function LandingPage() {
         </motion.div>
       </Section>
 
-      {/* ============================================================ */}
-      {/* 8. FINAL CTA */}
-      {/* ============================================================ */}
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
         <motion.div
           initial="hidden"
