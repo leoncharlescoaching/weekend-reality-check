@@ -1,17 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  Check,
-  ShieldAlert,
-  UserCircle2,
-  RotateCcw,
-  MessageSquareText,
-} from "lucide-react";
-
-/* ------------------------------------------------------------------ */
-/*  Shared config                                                      */
-/* ------------------------------------------------------------------ */
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -19,10 +7,6 @@ const fadeUp = {
 };
 
 const viewport = { once: true, amount: 0.3 };
-
-/* ------------------------------------------------------------------ */
-/*  Reusable CTA button                                                 */
-/* ------------------------------------------------------------------ */
 
 function CTAButton({ onClick, className = "", size = "lg" }) {
   const sizes = {
@@ -37,17 +21,12 @@ function CTAButton({ onClick, className = "", size = "lg" }) {
       className={`group inline-flex items-center justify-center gap-3 rounded-xl bg-amber-500 font-semibold tracking-tight text-neutral-950 shadow-lg shadow-amber-500/20 transition-all duration-200 hover:bg-amber-400 hover:shadow-amber-500/30 active:scale-[0.98] ${sizes[size]} ${className}`}
     >
       START MY FREE REALITY CHECK
-      <ArrowRight
-        className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1"
-        strokeWidth={2.5}
-      />
+      <span className="text-lg transition-transform duration-200 group-hover:translate-x-1">
+        →
+      </span>
     </button>
   );
 }
-
-/* ------------------------------------------------------------------ */
-/*  Section wrapper                                                     */
-/* ------------------------------------------------------------------ */
 
 function Section({ id, className = "", children }) {
   return (
@@ -59,10 +38,6 @@ function Section({ id, className = "", children }) {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Data                                                                */
-/* ------------------------------------------------------------------ */
-
 const trustItems = [
   "Under 2 minutes",
   "Personalised coaching breakdown",
@@ -72,22 +47,22 @@ const trustItems = [
 
 const deliverables = [
   {
-    icon: ShieldAlert,
+    icon: "🚨",
     title: "Bullshit Detected™",
     description: "The truth about what's really holding you back.",
   },
   {
-    icon: UserCircle2,
+    icon: "👤",
     title: "Weekend Profile™",
     description: "Discover your behaviour pattern.",
   },
   {
-    icon: RotateCcw,
+    icon: "🔄",
     title: "Monday Reset™",
     description: "Know exactly what to change next weekend.",
   },
   {
-    icon: MessageSquareText,
+    icon: "💬",
     title: "What I'd Do If You Were My Client™",
     description: "Experience how Leon coaches before spending a penny.",
   },
@@ -103,33 +78,15 @@ const checklistItems = [
 ];
 
 const steps = [
-  {
-    number: "1",
-    title: "Complete the Weekend Reality Check™.",
-  },
-  {
-    number: "2",
-    title: "Receive your personalised coaching breakdown.",
-  },
-  {
-    number: "3",
-    title: "See exactly what I'd change first.",
-  },
-  {
-    number: "4",
-    title: "Start putting it into action.",
-  },
+  { number: "1", title: "Complete the Weekend Reality Check™." },
+  { number: "2", title: "Receive your personalised coaching breakdown." },
+  { number: "3", title: "See exactly what I'd change first." },
+  { number: "4", title: "Start putting it into action." },
 ];
-
-/* ------------------------------------------------------------------ */
-/*  Page                                                                */
-/* ------------------------------------------------------------------ */
 
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
-    if (onStart) {
-      onStart();
-    }
+    if (onStart) onStart();
   };
 
   return (
@@ -163,7 +120,7 @@ export default function LandingPage({ onStart }) {
           <ul className="mt-10 flex flex-col flex-wrap gap-x-8 gap-y-3 text-sm text-neutral-400 sm:flex-row sm:items-center">
             {trustItems.map((item) => (
               <li key={item} className="flex items-center gap-2">
-                <Check className="h-4 w-4 shrink-0 text-amber-500" strokeWidth={3} />
+                <span className="font-bold text-amber-500">✓</span>
                 <span>{item}</span>
               </li>
             ))}
@@ -268,7 +225,7 @@ export default function LandingPage({ onStart }) {
           </p>
 
           <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {deliverables.map(({ icon: Icon, title, description }, i) => (
+            {deliverables.map(({ icon, title, description }, i) => (
               <motion.div
                 key={title}
                 initial="hidden"
@@ -279,7 +236,7 @@ export default function LandingPage({ onStart }) {
                 className="rounded-2xl border border-neutral-800 bg-neutral-900 p-6 shadow-lg shadow-black/20 sm:p-7"
               >
                 <div className="mb-6 flex aspect-video w-full items-center justify-center rounded-xl border border-neutral-800 bg-neutral-950">
-                  <Icon className="h-10 w-10 text-amber-500" strokeWidth={1.5} />
+                  <span className="text-5xl">{icon}</span>
                 </div>
                 <h3 className="text-xl font-bold tracking-tight text-white">
                   {title}
@@ -312,10 +269,7 @@ export default function LandingPage({ onStart }) {
                 key={item}
                 className="flex items-start gap-3 text-lg text-neutral-200 sm:text-xl"
               >
-                <Check
-                  className="mt-1 h-5 w-5 shrink-0 text-amber-500"
-                  strokeWidth={3}
-                />
+                <span className="mt-1 font-bold text-amber-500">✓</span>
                 <span>{item}</span>
               </li>
             ))}
