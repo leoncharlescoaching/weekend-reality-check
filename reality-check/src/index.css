@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Anton", "Impact", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --color-bg: #0d0d0d;
+  --color-card: #1b1b1b;
+  --color-card-hi: #242424;
+  --color-orange: #ff6a00;
+  --color-white: #ffffff;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+
+  --animate-bar-scan: bar-scan 1.6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 2.4s ease-in-out infinite;
+  --animate-shake: shake 0.5s ease-in-out;
+
+  @keyframes bar-scan {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(20%);
+    }
+    100% {
+      transform: translateX(120%);
+    }
+  }
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.75;
+      transform: scale(1.04);
+    }
+  }
+  @keyframes shake {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    20% {
+      transform: rotate(-6deg);
+    }
+    40% {
+      transform: rotate(5deg);
+    }
+    60% {
+      transform: rotate(-4deg);
+    }
+    80% {
+      transform: rotate(3deg);
+    }
+  }
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  background: var(--color-bg);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-white);
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
