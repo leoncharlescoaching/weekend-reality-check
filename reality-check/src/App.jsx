@@ -22,7 +22,7 @@ const QUESTION_TYPES = ["number", "choice", "height", "weight"];
 
 export default function App() {
   const flow = useMemo(() => buildFlow(), []);
-  const [stepIndex, setStepIndex] = useLocalStorage("rc_step", 0);
+  const [stepIndex, setStepIndex] = useState(1);
   const [answers, setAnswers] = useLocalStorage("rc_answers", {});
   const [unitSystem, setUnitSystem] = useLocalStorage("rc_units", "metric");
   const [direction, setDirection] = useState(1);
@@ -47,13 +47,13 @@ export default function App() {
 
   const goBack = () => {
     setDirection(-1);
-    setStepIndex((i) => Math.max(0, i - 1));
+    setStepIndex((i) => Math.max(1, i - 1));
   };
 
   const restart = () => {
     setDirection(-1);
     setAnswers({});
-    setStepIndex(0);
+    setStepIndex(1);
   };
 
   const recordAndAdvance = (field, value) => {
