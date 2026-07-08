@@ -35,9 +35,7 @@ export default function App() {
     [flow]
   );
 
-  const questionNumber =
-    questionSteps.findIndex((s) => s.id === step.id) + 1;
-
+  const questionNumber = questionSteps.findIndex((s) => s.id === step.id) + 1;
   const isQuestion = QUESTION_TYPES.includes(step.type);
 
   const results = useMemo(() => computeResults(answers), [answers]);
@@ -76,7 +74,6 @@ export default function App() {
   return (
     <div className="relative mx-auto flex h-svh max-w-md flex-col overflow-hidden bg-bg">
       <AnimatePresence initial={false} custom={direction}>
-
         {step.type === "splash" && (
           <ScreenShell key="splash" noPad direction={direction}>
             <Splash onDone={goNext} />
@@ -84,3 +81,70 @@ export default function App() {
         )}
 
         {step.type === "landing" && (
+          <ScreenShell key="landing" noPad direction={direction}>
+            <LandingPage onStart={goNext} />
+          </ScreenShell>
+        )}
+
+        {isQuestion && (
+          <ScreenShell key={step.id} direction={direction}>
+            <ProgressBar
+              current={questionNumber}
+              total={questionSteps.length}
+              section={step.section}
+              onBack={goBack}
+            />
+
+            {step.type === "choice" ? (
+              <ChoiceQuestion
+                question={step.question}
+                options={step.options}
+                value={answers[step.field]}
+                onAnswer={(value) => recordAndAdvance(step.field, value)}
+              />
+            ) : (
+              <MeasureQuestion
+                question={step}
+                type={step.type}
+                value={answers[step.field]}
+                unitSystem={unitSystem}
+                setUnitSystem={setUnitSystem}
+                onAnswer={(value) => recordAndAdvance(step.field, value)}
+              />
+            )}
+          </ScreenShell>
+        )}
+
+        {step.type === "scan" && (
+          <ScreenShell key="scan" noPad direction={direction}>
+            <LoadingScan onDone={goNext} />
+          </ScreenShell>
+        )}
+
+        {step.type === "results" && (
+          <ScreenShell key="results" noPad direction={direction}>
+            <Results results={results} onContinue={goNext} />
+          </ScreenShell>
+        )}
+
+        {step.type === "reset" && (
+          <ScreenShell key="reset" noPad direction={direction}>
+            <MondayReset results={results} onContinue={goNext} />
+          </ScreenShell>
+        )}
+
+        {step.type === "cta" && (
+          <ScreenShell key="cta" noPad direction={direction}>
+            <CoachingCTA onContinue={goNext} onSkip={goNext} />
+          </ScreenShell>
+        )}
+
+        {step.type === "email" && (
+          <ScreenShell key="email" noPad direction={direction}>
+            <EmailCapture onSubmit={recordEmail} onRestart={restart} />
+          </ScreenShell>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
