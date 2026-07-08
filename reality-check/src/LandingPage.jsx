@@ -42,22 +42,22 @@ const trustItems = [
 
 const deliverables = [
   {
-    icon: "🚨",
+    label: "01",
     title: "Bullshit Detected™",
     description: "The truth about what's really holding you back.",
   },
   {
-    icon: "👤",
+    label: "02",
     title: "Weekend Profile™",
     description: "Discover the pattern you keep repeating.",
   },
   {
-    icon: "🔄",
+    label: "03",
     title: "Monday Reset™",
     description: "Know exactly what to change next weekend.",
   },
   {
-    icon: "💬",
+    label: "04",
     title: "What I'd Do If You Were My Client™",
     description: "Experience how I coach before spending a penny.",
   },
@@ -146,14 +146,7 @@ export default function LandingPage({ onStart }) {
       </Section>
 
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-4xl"
-        >
+        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="max-w-4xl">
           <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             WHY YOU KEEP STARTING AGAIN EVERY MONDAY
           </h2>
@@ -179,14 +172,7 @@ export default function LandingPage({ onStart }) {
       </Section>
 
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]"
-        >
+        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">
             THIS ISN&apos;T ANOTHER FREE QUIZ.
           </h2>
@@ -204,10 +190,7 @@ export default function LandingPage({ onStart }) {
                 "Your Monday Reset™.",
                 "What I'd Do If You Were My Client™.",
               ].map((item) => (
-                <li
-                  key={item}
-                  className="rounded-2xl border border-neutral-800 bg-neutral-900 px-6 py-5 text-lg font-semibold text-neutral-200"
-                >
+                <li key={item} className="rounded-2xl border border-neutral-800 bg-neutral-900 px-6 py-5 text-lg font-semibold text-neutral-200">
                   <span className="mr-3 text-amber-500">•</span>
                   {item}
                 </li>
@@ -222,13 +205,7 @@ export default function LandingPage({ onStart }) {
       </Section>
 
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
+        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
           <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             HERE&apos;S EXACTLY WHAT YOU&apos;LL GET
           </h2>
@@ -240,7 +217,7 @@ export default function LandingPage({ onStart }) {
           </p>
 
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {deliverables.map(({ icon, title, description }, i) => (
+            {deliverables.map(({ label, title, description }, i) => (
               <motion.div
                 key={title}
                 initial="hidden"
@@ -251,11 +228,17 @@ export default function LandingPage({ onStart }) {
                 className="rounded-3xl border border-neutral-800 bg-neutral-900 p-8 shadow-lg shadow-black/20"
               >
                 <div className="mb-7 flex aspect-video w-full items-center justify-center rounded-2xl border border-neutral-800 bg-neutral-950">
-                  <span className="text-6xl">{icon}</span>
+                  <div className="flex h-24 w-24 items-center justify-center rounded-full border border-amber-500/30 bg-amber-500/10">
+                    <span className="text-3xl font-black tracking-widest text-amber-500">
+                      {label}
+                    </span>
+                  </div>
                 </div>
+
                 <h3 className="text-2xl font-black tracking-tight text-white">
                   {title}
                 </h3>
+
                 <p className="mt-3 text-lg leading-relaxed text-neutral-400">
                   {description}
                 </p>
@@ -266,14 +249,7 @@ export default function LandingPage({ onStart }) {
       </Section>
 
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]"
-        >
+        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">
             YOU&apos;LL RECOGNISE YOURSELF IF...
           </h2>
@@ -281,10 +257,7 @@ export default function LandingPage({ onStart }) {
           <div>
             <ul className="grid gap-4 sm:grid-cols-2">
               {checklistItems.map((item) => (
-                <li
-                  key={item}
-                  className="rounded-2xl border border-neutral-800 bg-neutral-900 px-5 py-4 text-base text-neutral-200"
-                >
+                <li key={item} className="rounded-2xl border border-neutral-800 bg-neutral-900 px-5 py-4 text-base text-neutral-200">
                   <span className="mr-3 font-bold text-amber-500">✓</span>
                   {item}
                 </li>
@@ -303,14 +276,7 @@ export default function LandingPage({ onStart }) {
       </Section>
 
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-4xl"
-        >
+        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="max-w-4xl">
           <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             WHY THIS WORKS
           </h2>
@@ -333,23 +299,14 @@ export default function LandingPage({ onStart }) {
       </Section>
 
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
+        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
           <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             WHAT HAPPENS NEXT?
           </h2>
 
           <div className="mt-14 grid gap-5 md:grid-cols-4">
             {steps.map((step, i) => (
-              <div
-                key={step}
-                className="rounded-3xl border border-neutral-800 bg-neutral-900 p-6 shadow-lg shadow-black/20"
-              >
+              <div key={step} className="rounded-3xl border border-neutral-800 bg-neutral-900 p-6 shadow-lg shadow-black/20">
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-lg font-black text-neutral-950">
                   {i + 1}
                 </span>
@@ -363,14 +320,7 @@ export default function LandingPage({ onStart }) {
       </Section>
 
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="rounded-3xl border border-neutral-800 bg-neutral-900 p-8 shadow-2xl shadow-black/30 sm:p-12 lg:p-16"
-        >
+        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="rounded-3xl border border-neutral-800 bg-neutral-900 p-8 shadow-2xl shadow-black/30 sm:p-12 lg:p-16">
           <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             READY TO FIND OUT WHAT&apos;S REALLY HOLDING YOU BACK?
           </h2>
