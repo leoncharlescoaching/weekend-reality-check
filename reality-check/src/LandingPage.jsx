@@ -95,9 +95,13 @@ export default function LandingPage({ onStart }) {
           className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]"
         >
           <div>
-            <p className="mb-5 inline-flex rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-amber-500">
-              Weekend Reality Check™
-            </p>
+            <div className="mb-8 flex items-center gap-4">
+  <img src="/lgf-logo.png" alt="Look Good Fitness" className="h-14 w-auto" />
+  <div>
+    <p className="text-sm font-bold uppercase tracking-[0.25em] text-amber-500">Created by Leon Charles</p>
+    <p className="text-sm text-neutral-500">Look Good Fitness</p>
+  </div>
+</div>
 
             <h1 className="max-w-5xl text-5xl font-black leading-[0.95] tracking-tight text-white sm:text-7xl lg:text-8xl">
               STOP STARTING AGAIN
@@ -113,9 +117,7 @@ export default function LandingPage({ onStart }) {
               I&apos;d coach you before you ever become a client.
             </p>
 
-            <div className="mt-10">
-              <CTAButton onClick={goToRealityCheck} />
-            </div>
+            
 
             <ul className="mt-8 grid gap-3 text-sm text-neutral-400 sm:grid-cols-2">
               {trustItems.map((item) => (
@@ -137,7 +139,11 @@ export default function LandingPage({ onStart }) {
                 allowFullScreen
               />
             </div>
-            <p className="mt-4 text-center text-sm text-neutral-500">
+            <div className="mt-6">
+  <CTAButton onClick={goToRealityCheck} className="w-full" />
+</div>
+
+<p className="mt-4 text-center text-sm text-neutral-500">
               Watch this first. I&apos;ll explain exactly how the Reality Check
               works and why weekends keep ruining your progress.
             </p>
