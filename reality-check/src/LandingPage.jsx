@@ -42,22 +42,22 @@ const trustItems = [
 
 const deliverables = [
   {
-    image: "/images/bullshit-detected.jpg",
+    label: "01",
     title: "Bullshit Detected™",
     description: "The truth about what's really holding you back.",
   },
   {
-    image: "/images/weekend-profile.jpg",
+    label: "02",
     title: "Weekend Profile™",
     description: "Discover the pattern you keep repeating.",
   },
   {
-    image: "/images/monday-reset.jpg",
+    label: "03",
     title: "Monday Reset™",
     description: "Know exactly what to change next weekend.",
   },
   {
-    image: "/images/coaching-breakdown.jpg",
+    label: "04",
     title: "What I'd Do If You Were My Client™",
     description: "Experience how I coach before spending a penny.",
   },
@@ -217,7 +217,7 @@ export default function LandingPage({ onStart }) {
           </p>
 
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {deliverables.map(({ image, title, description }, i) => (
+            {deliverables.map(({ label, title, description }, i) => (
               <motion.div
                 key={title}
                 initial="hidden"
@@ -227,12 +227,12 @@ export default function LandingPage({ onStart }) {
                 transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
                 className="rounded-3xl border border-neutral-800 bg-neutral-900 p-8 shadow-lg shadow-black/20"
               >
-                <div className="mb-7 aspect-video overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950">
-                  <img
-                    src={image}
-                    alt={title}
-                    className="h-full w-full object-cover"
-                  />
+                <div className="mb-7 flex aspect-video w-full items-center justify-center rounded-2xl border border-neutral-800 bg-neutral-950">
+                  <div className="flex h-24 w-24 items-center justify-center rounded-full border border-amber-500/30 bg-amber-500/10">
+                    <span className="text-3xl font-black tracking-widest text-amber-500">
+                      {label}
+                    </span>
+                  </div>
                 </div>
 
                 <h3 className="text-2xl font-black tracking-tight text-white">
@@ -298,7 +298,25 @@ export default function LandingPage({ onStart }) {
         </motion.div>
       </Section>
 
-      <Section className="border-t border-neutral-900 py-24 sm:py-32">
+            <Section className="border-t border-neutral-900 py-24 sm:py-32">
+        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp}>
+          <p className="text-center text-sm font-black uppercase tracking-[0.3em] text-amber-500">REAL RESULTS</p>
+          <h2 className="mt-4 text-center text-4xl font-black text-white sm:text-6xl">REAL MEN.<br/>REAL TRANSFORMATIONS.</h2>
+          <p className="mx-auto mt-6 max-w-3xl text-center text-neutral-400">Hundreds of busy men have already changed their bodies.</p>
+          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {["/images/client1.jpg","/images/client2.jpg","/images/client3.jpg","/images/client4.jpg","/images/client5.jpg","/images/mark-61.jpg"].map((img)=>(<div key={img} className="overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900"><img src={img} className="aspect-square w-full object-cover"/></div>))}
+          </div>
+          <div className="mx-auto mt-16 max-w-5xl rounded-3xl border border-neutral-800 bg-neutral-900 overflow-hidden">
+            <img src="/images/mark-61.jpg" className="w-full object-cover"/>
+            <div className="p-8">
+              <blockquote className="text-xl italic text-white">"I'd never trained properly in my life... my metabolic age came back at 45."</blockquote>
+              <p className="mt-6 font-black uppercase tracking-widest text-amber-500">MARK, 61 • BUSINESS OWNER • TEXAS</p>
+            </div>
+          </div>
+        </motion.div>
+      </Section>
+
+<Section className="border-t border-neutral-900 py-24 sm:py-32">
         <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
           <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             WHAT HAPPENS NEXT?
