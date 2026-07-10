@@ -92,12 +92,12 @@ const transformations = [
     name: "MARK, 61 — BUSINESS OWNER",
     quote: "At 61 I thought I'd left it too late. Leon adapted everything around my health, kept me accountable every week and gave me a clear plan. My cholesterol dropped significantly, my strength increased every phase and my metabolic age came back at 45."
   },
-  { image:"/images/vlad.png", name:"VLAD", result:"Built a lean athletic physique."},
-  { image:"/images/sam.png", name:"SAM", result:"Lost over 20kg and kept it off."},
-  { image:"/images/jack.png", name:"JACK", result:"Added muscle while dropping body fat."},
-  { image:"/images/glen.png", name:"GLEN", result:"Finally broke years of stalled progress."},
-  { image:"/images/chris.png", name:"CHRIS", result:"Stopped restarting every Monday."},
-  { image:"/images/caine.png", name:"CAINE", result:"Lost the weight and rebuilt his confidence."}
+  { image:"/images/vlad.png", name:"VLAD", result:"Spent years training without looking like he trained. With structure and accountability he built the lean athletic physique he had always wanted."},
+  { image:"/images/sam.png", name:"SAM", result:"Stopped restarting every Monday, fixed the habits holding him back and lost over 20kg."},
+  { image:"/images/jack.png", name:"JACK", result:"Stopped guessing in the gym and finally built muscle while dropping body fat."},
+  { image:"/images/glen.png", name:"GLEN", result:"After years of spinning his wheels he finally made consistent progress."},
+  { image:"/images/chris.png", name:"CHRIS", result:"Turned inconsistency into routine through simple coaching and accountability."},
+  { image:"/images/caine.png", name:"CAINE", result:"Built habits that lasted and transformed both his physique and confidence."}
 ];
 
 export default function LandingPage({ onStart }) {
@@ -373,9 +373,7 @@ export default function LandingPage({ onStart }) {
             </div>
           </div>
 
-          <h3 className="mt-20 text-center text-3xl font-black text-white sm:text-4xl">
-            MORE REAL RESULTS
-          </h3>
+          
 
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {transformations.slice(1).map((client) => (
@@ -393,6 +391,9 @@ export default function LandingPage({ onStart }) {
                   <p className="text-xl font-black tracking-wider text-white">
                     {client.name}
                   </p>
+                  <p className="mt-4 text-sm leading-relaxed text-neutral-300">
+                    {client.result}
+                  </p>
                 </div>
               </div>
             ))}
@@ -401,31 +402,6 @@ export default function LandingPage({ onStart }) {
       </Section>
 
       
-<Section className="border-t border-neutral-900 py-24 sm:py-32">
-<motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{duration:0.6}}>
-<h2 className="text-center text-4xl font-black text-white sm:text-6xl">REAL MEN. REAL RESULTS.</h2>
-<p className="mx-auto mt-6 max-w-3xl text-center text-lg text-neutral-400">Every man below started with different obstacles. None of them needed more motivation. They needed the right coaching.</p>
-<div className="mt-16 overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900">
-<img src={transformations[0].image} alt={transformations[0].name} className="w-full"/>
-<div className="p-8">
-<p className="text-2xl italic text-white">"{transformations[0].quote}"</p>
-<p className="mt-6 font-black tracking-wider text-amber-500">{transformations[0].name}</p>
-</div></div>
-<div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-{transformations.slice(1).map(client=>(
-<div key={client.name} className="overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900">
-<img src={client.image} alt={client.name} className="aspect-square w-full object-cover"/>
-<div className="p-6">
-<h3 className="text-xl font-black text-white">{client.name}</h3>
-<p className="mt-4 text-sm"><span className="font-bold text-amber-500">Pain:</span> {client.pain}</p>
-<p className="mt-2 text-sm"><span className="font-bold text-amber-500">Objection:</span> {client.objection}</p>
-<p className="mt-2 text-sm"><span className="font-bold text-amber-500">Outcome:</span> {client.outcome}</p>
-</div></div>
-))}
-</div>
-</motion.div>
-</Section>
-
 <Section className="border-t border-neutral-900 py-24 sm:py-32">
         <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
           <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
