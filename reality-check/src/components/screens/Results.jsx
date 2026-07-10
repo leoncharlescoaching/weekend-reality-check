@@ -23,6 +23,8 @@ function scoreColor(score) {
 
 function StatCard({ label, children, className = "" }) {
   return (
+    <>
+      <style>{`.results-scroll::-webkit-scrollbar{display:none;width:0;height:0;}`}</style>
     <div
       className={`rounded-2xl border border-white/10 bg-card/95 p-5 shadow-lg shadow-black/10 ${className}`}
     >
@@ -31,6 +33,7 @@ function StatCard({ label, children, className = "" }) {
       </p>
       <div className="mt-2">{children}</div>
     </div>
+    </>
   );
 }
 
@@ -42,17 +45,18 @@ export default function Results({ results, onContinue }) {
     results.bullshitLevel === "Nuclear" ? "Critical" : results.bullshitLevel;
 
   return (
-    <div className="flex h-full w-full flex-col overflow-y-auto px-5 pb-[calc(env(safe-area-inset-bottom)+2rem)] pt-[calc(env(safe-area-inset-top)+1.5rem)] sm:px-6">
+    <div className="results-scroll flex h-full w-full flex-col overflow-y-auto px-5 pb-[calc(env(safe-area-inset-bottom)+2rem)] pt-[calc(env(safe-area-inset-top)+1.5rem)] sm:px-6"
+      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
       <motion.img
         src="/images/bullshit-detected-logo.png"
         alt="Bullshit Detected™"
         initial={{ opacity: 0, scale: 0.9, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="mx-auto w-full max-w-[220px] drop-shadow-[0_0_28px_rgba(255,122,0,0.18)]"
+        className="mx-auto w-full max-w-[330px] drop-shadow-[0_0_28px_rgba(255,122,0,0.18)]"
       />
 
-      <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{delay:0.15}} className="mt-10 grid grid-cols-2 gap-3">
+      <div className="mt-7 grid grid-cols-2 gap-3">
         <StatCard label="Weekend Score™">
           <p className={`font-display text-4xl ${scoreColor(results.weekendScore)}`}>
             {results.weekendScore}
@@ -69,7 +73,7 @@ export default function Results({ results, onContinue }) {
             {displayedLevel}
           </span>
         </StatCard>
-      </motion.div>
+      </div>
 
       <StatCard label="Biggest Progress Killer" className="mt-3">
         <p className="font-display text-2xl leading-tight text-orange">
@@ -227,5 +231,6 @@ export default function Results({ results, onContinue }) {
         </PrimaryButton>
       </div>
     </div>
+    </>
   );
 }
