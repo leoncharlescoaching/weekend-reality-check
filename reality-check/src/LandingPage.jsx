@@ -95,57 +95,6 @@ const transformations = [
   { image: "/images/3.png", name: "CAINE" },
 ];
 
-
-const transformations = [
-  {
-    image: "/images/mark.png",
-    quote: "I'm 61. I'd never trained properly in my life. Leon didn't just give me a plan — he was in my corner every single week. Form videos, check-ins, adjusting everything around my health conditions. My cholesterol has dropped significantly, my strength has gone up every single phase, and my metabolic age came back at 45. I genuinely feel like I'm reversing the clock.",
-    name: "MARK, 61 — BUSINESS OWNER, TEXAS",
-  },
-  {
-    image:"/images/vlad.png",
-    name:"VLAD",
-    pain:"Looked like he trained but his physique never reflected the effort.",
-    objection:"Needed someone to tell him exactly what to change instead of guessing.",
-    outcome:"Built a lean, athletic physique with visible abs and dramatically improved conditioning."
-  },
-  {
-    image:"/images/sam.png",
-    name:"SAM",
-    pain:"Couldn't stay consistent enough to get lean.",
-    objection:"Thought weekends always ruined his progress.",
-    outcome:"Dropped over 20kg and completely changed his lifestyle."
-  },
-  {
-    image:"/images/jack.png",
-    name:"JACK",
-    pain:"Wanted a stronger physique without wasting years guessing.",
-    objection:"Didn't have structure or accountability.",
-    outcome:"Added muscle and transformed his body composition."
-  },
-  {
-    image:"/images/glen.png",
-    name:"GLEN",
-    pain:"Stuck carrying excess body fat despite training.",
-    objection:"Didn't know what actually needed changing.",
-    outcome:"Dropped significant body fat and rebuilt his confidence."
-  },
-  {
-    image:"/images/chris.png",
-    name:"CHRIS",
-    pain:"Wanted to get lean but couldn't stay consistent.",
-    objection:"Thought he'd always end up back where he started.",
-    outcome:"Built visible muscle definition and a routine he could maintain."
-  },
-  {
-    image:"/images/caine.png",
-    name:"CAINE",
-    pain:"Spent years dieting without lasting results.",
-    objection:"Thought coaching meant giving up his lifestyle.",
-    outcome:"Lost the weight and built habits that lasted."
-  }
-];
-
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
     if (onStart) onStart();
@@ -446,33 +395,7 @@ export default function LandingPage({ onStart }) {
         </motion.div>
       </Section>
 
-      
-<Section className="border-t border-neutral-900 py-24 sm:py-32">
-<motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{duration:0.6}}>
-<h2 className="text-center text-4xl font-black text-white sm:text-6xl">REAL MEN. REAL RESULTS.</h2>
-<p className="mx-auto mt-6 max-w-3xl text-center text-lg text-neutral-400">Every man below started with different obstacles. None of them needed more motivation. They needed the right coaching.</p>
-<div className="mt-16 overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900">
-<img src={transformations[0].image} alt={transformations[0].name} className="w-full"/>
-<div className="p-8">
-<p className="text-2xl italic text-white">"{transformations[0].quote}"</p>
-<p className="mt-6 font-black tracking-wider text-amber-500">{transformations[0].name}</p>
-</div></div>
-<div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-{transformations.slice(1).map(client=>(
-<div key={client.name} className="overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900">
-<img src={client.image} alt={client.name} className="aspect-square w-full object-cover"/>
-<div className="p-6">
-<h3 className="text-xl font-black text-white">{client.name}</h3>
-<p className="mt-4 text-sm"><span className="font-bold text-amber-500">Pain:</span> {client.pain}</p>
-<p className="mt-2 text-sm"><span className="font-bold text-amber-500">Objection:</span> {client.objection}</p>
-<p className="mt-2 text-sm"><span className="font-bold text-amber-500">Outcome:</span> {client.outcome}</p>
-</div></div>
-))}
-</div>
-</motion.div>
-</Section>
-
-<Section className="border-t border-neutral-900 py-24 sm:py-32">
+      <Section className="border-t border-neutral-900 py-24 sm:py-32">
         <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
           <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             WHAT HAPPENS NEXT?
