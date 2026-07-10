@@ -33,7 +33,6 @@ function StatCard({ label, children, className = "" }) {
       </p>
       <div className="mt-2">{children}</div>
     </div>
-    </>
   );
 }
 
@@ -231,6 +230,5 @@ export default function Results({ results, onContinue }) {
         </PrimaryButton>
       </div>
     </div>
-    </>
   );
 }
