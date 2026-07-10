@@ -152,7 +152,7 @@ export default function LandingPage({ onStart }) {
             <div className="aspect-video overflow-hidden rounded-2xl bg-neutral-950">
               <iframe
                 className="h-full w-full"
-                src="PASTE_YOUR_VIDEO_EMBED_URL_HERE"
+                src="https://www.youtube.com/embed/wSqJd2zXmes?rel=0&modestbranding=1"
                 title="Weekend Reality Check welcome video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
