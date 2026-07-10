@@ -182,22 +182,32 @@ export function buildMondayResetTips(results) {
     return CLEAN_WEEKEND_TIPS;
   }
 
-  const pool =
-    results.biggestKiller === "Poor Food Choices"
-      ? ["Takeaways", "Desserts", "Snacking"]
-      : Object.keys(results.categoryTotals);
+  // Always lead with the biggest killer — never let a secondary category
+  // override it as tip 1. Then find the next highest category that's different
+  // from the biggest killer to use as tip 2.
+  const primaryCategory =
+    results.biggestKiller === "Poor Food Choices" ? "Takeaways" : results.biggestKiller;
 
-  const topCategories = pool
-    .map((c) => [c, results.categoryTotals[c]])
-    .filter(([, v]) => v > 0)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 2)
-    .map(([c]) => c);
+  const tips = [];
 
-  const tips = topCategories.map((cat) => CATEGORY_TIP[cat](results.worstDays[cat]));
+  // Tip 1 — always the biggest killer
+  if (CATEGORY_TIP[primaryCategory]) {
+    tips.push(CATEGORY_TIP[primaryCategory](results.worstDays[primaryCategory] || "Saturday"));
+  }
 
+  // Tip 2 — next highest category that isn't the primary
+  const secondaryPool = Object.keys(results.categoryTotals)
+    .filter((c) => c !== primaryCategory && results.categoryTotals[c] > 0)
+    .sort((a, b) => results.categoryTotals[b] - results.categoryTotals[a]);
+
+  if (secondaryPool.length > 0 && CATEGORY_TIP[secondaryPool[0]]) {
+    tips.push(CATEGORY_TIP[secondaryPool[0]](results.worstDays[secondaryPool[0]] || "Saturday"));
+  }
+
+  // Tip 3 — always a goal-specific tip
   tips.push(GOAL_TIP[results.goal] || GOAL_TIP.lose_fat);
 
+  // Pad to 3 if needed
   if (tips.length < 3) {
     const cleanCategory = Object.entries(results.categoryTotals).find(([, v]) => v === 0);
     if (cleanCategory) {
