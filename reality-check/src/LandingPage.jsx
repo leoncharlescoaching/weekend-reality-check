@@ -210,11 +210,11 @@ export default function LandingPage({ onStart }) {
                 transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
                 className="rounded-3xl border border-neutral-800 bg-neutral-900 p-8 shadow-lg shadow-black/20"
               >
-                <div className="mb-7 aspect-video overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950">
+                <div className="mb-7 aspect-[3/4] overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950">
                   <img
                     src={image}
                     alt={title}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain"
                   />
                 </div>
                 <h3 className="text-2xl font-black tracking-tight text-white">
