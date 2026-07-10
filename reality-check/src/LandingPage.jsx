@@ -80,20 +80,7 @@ const steps = [
 ];
 
 
-const transformations = [
-  {
-    image: "/images/100.png",
-    quote:
-      "I'm 61. I'd never trained properly in my life. Leon didn't just give me a plan — he was in my corner every single week. Form videos, check-ins, adjusting everything around my health conditions. My cholesterol has dropped significantly, my strength has gone up every single phase, and my metabolic age came back at 45. I genuinely feel like I'm reversing the clock.",
-    name: "MARK, 61 — BUSINESS OWNER, TEXAS",
-  },
-  { image: "/images/8.png", name: "VINCE" },
-  { image: "/images/12.png", name: "SAM" },
-  { image: "/images/10.png", name: "JAKE" },
-  { image: "/images/6.png", name: "MATT" },
-  { image: "/images/2.png", name: "LEE" },
-  { image: "/images/3.png", name: "CAINE" },
-];
+
 
 
 
