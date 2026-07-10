@@ -15,11 +15,11 @@ export default function MondayReset({ results, onContinue }) {
       </span>
 
       <h1 className="mt-4 font-display text-3xl leading-tight text-white sm:text-4xl">
-        {isClean ? "Nothing to fix here." : "Fixing this doesn't need a new plan."}
+        {isClean ? "Nothing to fix here." : "You don't need a new plan. You need to actually run the one you've got."}
       </h1>
       <p className="mt-3 text-white/50">
         {isClean ? (
-          "Just keep doing what already worked."
+          "Keep doing exactly what you did. Then do it again next weekend."
         ) : (
           <>
             Just three moves aimed at your biggest leak:{" "}
