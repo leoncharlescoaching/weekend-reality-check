@@ -85,44 +85,6 @@ const steps = [
 
 
 
-const transformations = [
-  {
-    image: "/images/mark.png",
-    name: "MARK, 61 — BUSINESS OWNER",
-    quote: "At 61 I thought I'd left it too late. Leon adapted everything around my health, kept me accountable every week and gave me a clear plan. My cholesterol dropped significantly, my strength increased every phase and my metabolic age came back at 45."
-  },
-  {
-    image: "/images/vlad.png",
-    name: "VLAD",
-    story: "Spent years training without ever looking like he trained. Once we gave him structure, accountability and a plan built around his life, he built the lean athletic physique he'd been chasing."
-  },
-  {
-    image: "/images/sam.png",
-    name: "SAM",
-    story: "Kept restarting every Monday after blowing every weekend. We fixed the habits that were actually holding him back, and he dropped over 20kg without another crash diet."
-  },
-  {
-    image: "/images/jack.png",
-    name: "JACK",
-    story: "Worked hard but never looked different because there was no direction. We simplified everything and transformed his physique."
-  },
-  {
-    image: "/images/glen.png",
-    name: "GLEN",
-    story: "Stuck in the same cycle for years. Once he stopped guessing and followed a proper coaching plan, the results came quickly."
-  },
-  {
-    image: "/images/chris.png",
-    name: "CHRIS",
-    story: "Knew exactly what he should be doing but couldn't stay consistent. Weekly accountability turned frustration into visible progress."
-  },
-  {
-    image: "/images/caine.png",
-    name: "CAINE",
-    story: "Had tried every quick fix without anything lasting. We built habits he could stick to and the weight finally stayed off."
-  }
-];
-
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
     if (onStart) onStart();
@@ -440,9 +402,9 @@ export default function LandingPage({ onStart }) {
 <img src={client.image} alt={client.name} className="aspect-square w-full object-cover"/>
 <div className="p-6">
 <h3 className="text-xl font-black text-white">{client.name}</h3>
-<p className="mt-4 text-sm leading-relaxed text-neutral-300">
-  {client.story}
-</p>
+<p className="mt-4 text-sm"><span className="font-bold text-amber-500">Pain:</span> {client.pain}</p>
+<p className="mt-2 text-sm"><span className="font-bold text-amber-500">Objection:</span> {client.objection}</p>
+<p className="mt-2 text-sm"><span className="font-bold text-amber-500">Outcome:</span> {client.outcome}</p>
 </div></div>
 ))}
 </div>
