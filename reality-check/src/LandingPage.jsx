@@ -85,19 +85,42 @@ const steps = [
 
 
 
-
 const transformations = [
   {
     image: "/images/mark.png",
-    name: "MARK, 61 — BUSINESS OWNER, TEXAS",
+    name: "MARK, 61 — BUSINESS OWNER",
     quote: "At 61 I thought I'd left it too late. Leon adapted everything around my health, kept me accountable every week and gave me a clear plan. My cholesterol dropped significantly, my strength increased every phase and my metabolic age came back at 45."
   },
-  {image:"/images/vlad.png",name:"VLAD",pain:"Struggled to stay consistent.",objection:"Thought he needed more motivation.",outcome:"Built a leaner stronger physique."},
-  {image:"/images/sam.png",name:"SAM",pain:"Weekends ruined progress.",objection:"Thought nothing worked.",outcome:"Lost over 20kg."},
-  {image:"/images/jack.png",name:"JACK",pain:"No structure.",objection:"Didn't know where to start.",outcome:"Added muscle and lost fat."},
-  {image:"/images/glen.png",name:"GLEN",pain:"Stuck for years.",objection:"Couldn't break through.",outcome:"Complete transformation."},
-  {image:"/images/chris.png",name:"CHRIS",pain:"Always restarting.",objection:"Couldn't stay consistent.",outcome:"Finally built habits."},
-  {image:"/images/caine.png",name:"CAINE",pain:"Years of failed diets.",objection:"Thought he'd always yo-yo.",outcome:"Lost the weight and kept it off."}
+  {
+    image: "/images/vlad.png",
+    name: "VLAD",
+    story: "Spent years training without ever looking like he trained. Once we gave him structure, accountability and a plan built around his life, he built the lean athletic physique he'd been chasing."
+  },
+  {
+    image: "/images/sam.png",
+    name: "SAM",
+    story: "Kept restarting every Monday after blowing every weekend. We fixed the habits that were actually holding him back, and he dropped over 20kg without another crash diet."
+  },
+  {
+    image: "/images/jack.png",
+    name: "JACK",
+    story: "Worked hard but never looked different because there was no direction. We simplified everything and transformed his physique."
+  },
+  {
+    image: "/images/glen.png",
+    name: "GLEN",
+    story: "Stuck in the same cycle for years. Once he stopped guessing and followed a proper coaching plan, the results came quickly."
+  },
+  {
+    image: "/images/chris.png",
+    name: "CHRIS",
+    story: "Knew exactly what he should be doing but couldn't stay consistent. Weekly accountability turned frustration into visible progress."
+  },
+  {
+    image: "/images/caine.png",
+    name: "CAINE",
+    story: "Had tried every quick fix without anything lasting. We built habits he could stick to and the weight finally stayed off."
+  }
 ];
 
 export default function LandingPage({ onStart }) {
@@ -321,6 +344,87 @@ export default function LandingPage({ onStart }) {
 
 
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <p className="text-center text-sm font-black uppercase tracking-[0.35em] text-amber-500">
+            REAL RESULTS
+          </p>
+
+          <h2 className="mt-4 text-center text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            REAL MEN.
+            <br />
+            REAL TRANSFORMATIONS.
+          </h2>
+
+          <p className="mx-auto mt-6 max-w-3xl text-center text-lg leading-relaxed text-neutral-400 sm:text-xl">
+            Busy dads. Busy professionals. Real clients who stopped starting
+            again every Monday.
+          </p>
+
+          <div className="mx-auto mt-16 max-w-5xl overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900 shadow-2xl shadow-black/30">
+            <img
+              src={transformations[0].image}
+              alt={transformations[0].name}
+              className="w-full object-cover"
+            />
+
+            <div className="p-8 lg:p-10">
+              <div className="flex flex-wrap gap-3">
+                <span className="rounded-full bg-amber-500 px-4 py-2 text-sm font-black text-neutral-950">
+                  61 YEARS OLD
+                </span>
+                <span className="rounded-full bg-neutral-800 px-4 py-2 text-sm font-bold text-white">
+                  Metabolic Age: 45
+                </span>
+                <span className="rounded-full bg-neutral-800 px-4 py-2 text-sm font-bold text-white">
+                  Cholesterol Reduced
+                </span>
+              </div>
+
+              <blockquote className="mt-8 text-xl italic leading-relaxed text-white lg:text-2xl">
+                "{transformations[0].quote}"
+              </blockquote>
+
+              <p className="mt-8 text-sm font-black uppercase tracking-widest text-amber-500 sm:text-base">
+                {transformations[0].name}
+              </p>
+            </div>
+          </div>
+
+          <h3 className="mt-20 text-center text-3xl font-black text-white sm:text-4xl">
+            MORE REAL RESULTS
+          </h3>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {transformations.slice(1).map((client) => (
+              <div
+                key={client.name}
+                className="overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900 shadow-lg shadow-black/20 transition duration-200 hover:-translate-y-1 hover:border-amber-500/40"
+              >
+                <img
+                  src={client.image}
+                  alt={client.name}
+                  className="aspect-square w-full object-cover"
+                />
+
+                <div className="p-6">
+                  <p className="text-xl font-black tracking-wider text-white">
+                    {client.name}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </Section>
+
+      
+<Section className="border-t border-neutral-900 py-24 sm:py-32">
 <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{duration:0.6}}>
 <h2 className="text-center text-4xl font-black text-white sm:text-6xl">REAL MEN. REAL RESULTS.</h2>
 <p className="mx-auto mt-6 max-w-3xl text-center text-lg text-neutral-400">Every man below started with different obstacles. None of them needed more motivation. They needed the right coaching.</p>
@@ -336,9 +440,9 @@ export default function LandingPage({ onStart }) {
 <img src={client.image} alt={client.name} className="aspect-square w-full object-cover"/>
 <div className="p-6">
 <h3 className="text-xl font-black text-white">{client.name}</h3>
-<p className="mt-4 text-sm"><span className="font-bold text-amber-500">Pain:</span> {client.pain}</p>
-<p className="mt-2 text-sm"><span className="font-bold text-amber-500">Objection:</span> {client.objection}</p>
-<p className="mt-2 text-sm"><span className="font-bold text-amber-500">Outcome:</span> {client.outcome}</p>
+<p className="mt-4 text-sm leading-relaxed text-neutral-300">
+  {client.story}
+</p>
 </div></div>
 ))}
 </div>
