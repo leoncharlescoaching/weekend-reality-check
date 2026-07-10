@@ -150,13 +150,15 @@ export default function LandingPage({ onStart }) {
 
           <div className="rounded-3xl border border-neutral-800 bg-neutral-900 p-4 shadow-2xl shadow-black/40">
             <div className="aspect-video overflow-hidden rounded-2xl bg-neutral-950">
-              <iframe
-                className="h-full w-full"
-                src="https://www.youtube.com/embed/wSqJd2zXmes?rel=0&modestbranding=1"
-                title="Weekend Reality Check welcome video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              <video
+                className="h-full w-full rounded-2xl"
+                controls
+                playsInline
+                preload="metadata"
+              >
+                <source src="/theweekendrealitycheck.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
             <p className="mt-4 text-center text-sm text-neutral-500">
               Watch this first. I&apos;ll explain exactly how the Reality Check
