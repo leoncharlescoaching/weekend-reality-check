@@ -22,32 +22,35 @@ const QUESTION_TYPES = ["number", "choice", "height", "weight"];
 
 export default function App() {
   const flow = useMemo(() => buildFlow(), []);
-  const [stepIndex, setStepIndex] = useState(1);
+  const [stepIndex, setStepIndex] = useLocalStorage("rc_step", 1);
   const [answers, setAnswers] = useLocalStorage("rc_answers", {});
   const [unitSystem, setUnitSystem] = useLocalStorage("rc_units", "metric");
   const [direction, setDirection] = useState(1);
 
-  const safeIndex = Math.min(stepIndex, flow.length - 1);
+  const safeIndex = Math.min(Math.max(stepIndex, 0), flow.length - 1);
   const step = flow[safeIndex];
 
   const questionSteps = useMemo(
-    () => flow.filter((s) => QUESTION_TYPES.includes(s.type)),
+    () => flow.filter((item) => QUESTION_TYPES.includes(item.type)),
     [flow]
   );
 
-  const questionNumber = questionSteps.findIndex((s) => s.id === step.id) + 1;
+  const questionNumber =
+    questionSteps.findIndex((item) => item.id === step.id) + 1;
   const isQuestion = QUESTION_TYPES.includes(step.type);
 
   const results = useMemo(() => computeResults(answers), [answers]);
 
   const goNext = () => {
     setDirection(1);
-    setStepIndex((i) => Math.min(flow.length - 1, i + 1));
+    setStepIndex((current) =>
+      Math.min(flow.length - 1, current + 1)
+    );
   };
 
   const goBack = () => {
     setDirection(-1);
-    setStepIndex((i) => Math.max(1, i - 1));
+    setStepIndex((current) => Math.max(1, current - 1));
   };
 
   const restart = () => {
@@ -57,19 +60,23 @@ export default function App() {
   };
 
   const recordAndAdvance = (field, value) => {
-    setAnswers((prev) => ({
-      ...prev,
+    setAnswers((current) => ({
+      ...current,
       [field]: value,
     }));
     goNext();
   };
 
   const recordEmail = (email) => {
-    setAnswers((prev) => ({
-      ...prev,
+    setAnswers((current) => ({
+      ...current,
       email,
     }));
   };
+
+  if (!step) {
+    return null;
+  }
 
   if (step.type === "landing") {
     return <LandingPage onStart={goNext} />;
@@ -77,7 +84,11 @@ export default function App() {
 
   return (
     <div className="relative mx-auto flex h-svh max-w-md flex-col overflow-hidden bg-bg">
-      <AnimatePresence initial={false} custom={direction}>
+      <AnimatePresence
+        initial={false}
+        custom={direction}
+        mode="popLayout"
+      >
         {step.type === "splash" && (
           <ScreenShell key="splash" noPad direction={direction}>
             <Splash onDone={goNext} />
@@ -98,7 +109,9 @@ export default function App() {
                 question={step.question}
                 options={step.options}
                 value={answers[step.field]}
-                onAnswer={(value) => recordAndAdvance(step.field, value)}
+                onAnswer={(value) =>
+                  recordAndAdvance(step.field, value)
+                }
               />
             ) : (
               <MeasureQuestion
@@ -107,7 +120,9 @@ export default function App() {
                 value={answers[step.field]}
                 unitSystem={unitSystem}
                 setUnitSystem={setUnitSystem}
-                onAnswer={(value) => recordAndAdvance(step.field, value)}
+                onAnswer={(value) =>
+                  recordAndAdvance(step.field, value)
+                }
               />
             )}
           </ScreenShell>
@@ -133,13 +148,19 @@ export default function App() {
 
         {step.type === "cta" && (
           <ScreenShell key="cta" noPad direction={direction}>
-            <CoachingCTA onContinue={goNext} onSkip={goNext} />
+            <CoachingCTA
+              onContinue={goNext}
+              onSkip={goNext}
+            />
           </ScreenShell>
         )}
 
         {step.type === "email" && (
           <ScreenShell key="email" noPad direction={direction}>
-            <EmailCapture onSubmit={recordEmail} onRestart={restart} />
+            <EmailCapture
+              onSubmit={recordEmail}
+              onRestart={restart}
+            />
           </ScreenShell>
         )}
       </AnimatePresence>
