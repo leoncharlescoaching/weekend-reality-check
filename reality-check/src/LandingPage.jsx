@@ -10,7 +10,7 @@ function CTAButton({ onClick, className = "" }) {
     <button
       type="button"
       onClick={onClick}
-      className={`group inline-flex items-center justify-center gap-3 rounded-xl bg-amber-500 px-10 py-5 text-base font-black tracking-tight text-neutral-950 shadow-lg shadow-amber-500/20 transition-all duration-200 hover:bg-amber-400 active:scale-[0.98] sm:text-lg ${className}`}
+      className={`group inline-flex w-full items-center justify-center gap-3 rounded-xl bg-[#ff6a00] px-6 py-4 text-sm font-black tracking-tight text-neutral-950 shadow-lg shadow-[#ff6a00]/20 transition-all duration-200 hover:bg-[#ff8833] active:scale-[0.98] sm:w-auto sm:px-10 sm:py-5 sm:text-lg ${className}`}
     >
       START MY FREE REALITY CHECK
       <span className="text-xl transition-transform duration-200 group-hover:translate-x-1">
@@ -88,7 +88,7 @@ export default function LandingPage({ onStart }) {
     if (onStart) onStart();
   };
   return (
-    <main className="min-h-screen w-full bg-neutral-950 text-neutral-100 antialiased">
+    <main className="min-h-screen w-full overflow-x-hidden bg-neutral-950 text-neutral-100 antialiased">
       <Section className="pt-20 pb-20 sm:pt-28 sm:pb-24 lg:pt-32 lg:pb-28">
         <motion.div
           initial="hidden"
@@ -98,13 +98,13 @@ export default function LandingPage({ onStart }) {
           className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]"
         >
           <div>
-            <p className="mb-5 inline-flex rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-amber-500">
+            <p className="mb-5 inline-flex rounded-full border border-[#ff6a00]/30 bg-[#ff6a00]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-[#ff6a00]">
               Weekend Reality Check™
             </p>
-            <h1 className="max-w-5xl text-5xl font-black leading-[0.95] tracking-tight text-white sm:text-7xl lg:text-8xl">
+            <h1 className="max-w-5xl break-words text-4xl font-black leading-[0.95] tracking-tight text-white sm:text-7xl lg:text-8xl">
               STOP STARTING AGAIN
               <br />
-              EVERY MONDAY<span className="text-amber-500">™</span>
+              EVERY MONDAY<span className="text-[#ff6a00]">™</span>
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
               Brother — you&apos;ve been doing the same shit for years. Same cycle. Same excuses. Same result. The Weekend Reality Check<span className="text-neutral-200">™</span> finds exactly what&apos;s been sabotaging you every single weekend and shows you how I&apos;d coach you before you spend a single penny. It&apos;s free. And it&apos;s better than most people&apos;s paid coaching. I mean that.
@@ -115,13 +115,13 @@ export default function LandingPage({ onStart }) {
             <ul className="mt-8 grid gap-3 text-sm text-neutral-400 sm:grid-cols-2">
               {trustItems.map((item) => (
                 <li key={item} className="flex items-center gap-2">
-                  <span className="font-bold text-amber-500">✓</span>
+                  <span className="font-bold text-[#ff6a00]">✓</span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-3xl border border-neutral-800 bg-neutral-900 p-4 shadow-2xl shadow-black/40">
+          <div className="rounded-3xl border border-neutral-800 bg-neutral-900 p-3 shadow-2xl shadow-black/40 sm:p-4">
             <div className="aspect-video overflow-hidden rounded-2xl bg-neutral-950">
               <video
                 className="h-full w-full rounded-2xl"
@@ -180,7 +180,7 @@ export default function LandingPage({ onStart }) {
                 "What I'd Do If You Were My Client™.",
               ].map((item) => (
                 <li key={item} className="rounded-2xl border border-neutral-800 bg-neutral-900 px-6 py-5 text-lg font-semibold text-neutral-200">
-                  <span className="mr-3 text-amber-500">•</span>
+                  <span className="mr-3 text-[#ff6a00]">•</span>
                   {item}
                 </li>
               ))}
@@ -237,7 +237,7 @@ export default function LandingPage({ onStart }) {
             <ul className="grid gap-4 sm:grid-cols-2">
               {checklistItems.map((item) => (
                 <li key={item} className="rounded-2xl border border-neutral-800 bg-neutral-900 px-5 py-4 text-base text-neutral-200">
-                  <span className="mr-3 font-bold text-amber-500">✓</span>
+                  <span className="mr-3 font-bold text-[#ff6a00]">✓</span>
                   {item}
                 </li>
               ))}
@@ -278,7 +278,7 @@ export default function LandingPage({ onStart }) {
           variants={fadeUp}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <p className="text-center text-sm font-black uppercase tracking-[0.35em] text-amber-500">
+          <p className="text-center text-sm font-black uppercase tracking-[0.35em] text-[#ff6a00]">
             REAL RESULTS
           </p>
           <h2 className="mt-4 text-center text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
@@ -297,7 +297,7 @@ export default function LandingPage({ onStart }) {
             />
             <div className="p-8 lg:p-10">
               <div className="flex flex-wrap gap-3">
-                <span className="rounded-full bg-amber-500 px-4 py-2 text-sm font-black text-neutral-950">
+                <span className="rounded-full bg-[#ff6a00] px-4 py-2 text-sm font-black text-neutral-950">
                   61 YEARS OLD
                 </span>
                 <span className="rounded-full bg-neutral-800 px-4 py-2 text-sm font-bold text-white">
@@ -310,7 +310,7 @@ export default function LandingPage({ onStart }) {
               <blockquote className="mt-8 text-xl italic leading-relaxed text-white lg:text-2xl">
                 "{transformations[0].quote}"
               </blockquote>
-              <p className="mt-8 text-sm font-black uppercase tracking-widest text-amber-500 sm:text-base">
+              <p className="mt-8 text-sm font-black uppercase tracking-widest text-[#ff6a00] sm:text-base">
                 {transformations[0].name}
               </p>
             </div>
@@ -320,7 +320,7 @@ export default function LandingPage({ onStart }) {
             {transformations.slice(1).map((client) => (
               <div
                 key={client.name}
-                className="overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900 shadow-lg shadow-black/20 transition duration-200 hover:-translate-y-1 hover:border-amber-500/40"
+                className="overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900 shadow-lg shadow-black/20 transition duration-200 hover:-translate-y-1 hover:border-[#ff6a00]/40"
               >
                 <img
                   src={client.image}
@@ -349,7 +349,7 @@ export default function LandingPage({ onStart }) {
           <div className="mt-14 grid gap-5 md:grid-cols-4">
             {steps.map((step, i) => (
               <div key={step} className="rounded-3xl border border-neutral-800 bg-neutral-900 p-6 shadow-lg shadow-black/20">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-lg font-black text-neutral-950">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ff6a00] text-lg font-black text-neutral-950">
                   {i + 1}
                 </span>
                 <p className="mt-6 text-lg font-semibold leading-snug text-white">
