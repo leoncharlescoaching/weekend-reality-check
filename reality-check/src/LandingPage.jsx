@@ -96,55 +96,6 @@ const transformations = [
 ];
 
 
-const transformations = [
-  {
-    image: "/images/mark.png",
-    quote: "I'm 61. I'd never trained properly in my life. Leon didn't just give me a plan — he was in my corner every single week. Form videos, check-ins, adjusting everything around my health conditions. My cholesterol has dropped significantly, my strength has gone up every single phase, and my metabolic age came back at 45. I genuinely feel like I'm reversing the clock.",
-    name: "MARK, 61 — BUSINESS OWNER, TEXAS",
-  },
-  {
-    image:"/images/vlad.png",
-    name:"VLAD",
-    pain:"Looked like he trained but his physique never reflected the effort.",
-    objection:"Needed someone to tell him exactly what to change instead of guessing.",
-    outcome:"Built a lean, athletic physique with visible abs and dramatically improved conditioning."
-  },
-  {
-    image:"/images/sam.png",
-    name:"SAM",
-    pain:"Couldn't stay consistent enough to get lean.",
-    objection:"Thought weekends always ruined his progress.",
-    outcome:"Dropped over 20kg and completely changed his lifestyle."
-  },
-  {
-    image:"/images/jack.png",
-    name:"JACK",
-    pain:"Wanted a stronger physique without wasting years guessing.",
-    objection:"Didn't have structure or accountability.",
-    outcome:"Added muscle and transformed his body composition."
-  },
-  {
-    image:"/images/glen.png",
-    name:"GLEN",
-    pain:"Stuck carrying excess body fat despite training.",
-    objection:"Didn't know what actually needed changing.",
-    outcome:"Dropped significant body fat and rebuilt his confidence."
-  },
-  {
-    image:"/images/chris.png",
-    name:"CHRIS",
-    pain:"Wanted to get lean but couldn't stay consistent.",
-    objection:"Thought he'd always end up back where he started.",
-    outcome:"Built visible muscle definition and a routine he could maintain."
-  },
-  {
-    image:"/images/caine.png",
-    name:"CAINE",
-    pain:"Spent years dieting without lasting results.",
-    objection:"Thought coaching meant giving up his lifestyle.",
-    outcome:"Lost the weight and built habits that lasted."
-  }
-];
 
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
