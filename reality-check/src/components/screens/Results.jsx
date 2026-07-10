@@ -49,10 +49,10 @@ export default function Results({ results, onContinue }) {
         initial={{ opacity: 0, scale: 0.9, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="mx-auto w-full max-w-[330px] drop-shadow-[0_0_28px_rgba(255,122,0,0.18)]"
+        className="mx-auto w-full max-w-[220px] drop-shadow-[0_0_28px_rgba(255,122,0,0.18)]"
       />
 
-      <div className="mt-7 grid grid-cols-2 gap-3">
+      <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{delay:0.15}} className="mt-10 grid grid-cols-2 gap-3">
         <StatCard label="Weekend Score™">
           <p className={`font-display text-4xl ${scoreColor(results.weekendScore)}`}>
             {results.weekendScore}
@@ -69,7 +69,7 @@ export default function Results({ results, onContinue }) {
             {displayedLevel}
           </span>
         </StatCard>
-      </div>
+      </motion.div>
 
       <StatCard label="Biggest Progress Killer" className="mt-3">
         <p className="font-display text-2xl leading-tight text-orange">
