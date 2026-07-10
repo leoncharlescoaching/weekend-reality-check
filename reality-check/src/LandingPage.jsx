@@ -152,9 +152,11 @@ export default function LandingPage({ onStart }) {
             <div className="aspect-video overflow-hidden rounded-2xl bg-neutral-950">
               <video
                 className="h-full w-full rounded-2xl"
-                controls
+                autoPlay
+                muted
                 playsInline
-                preload="metadata"
+                preload="auto"
+                controls
               >
                 <source src="/theweekendrealitycheck.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
