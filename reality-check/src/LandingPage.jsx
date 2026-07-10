@@ -85,6 +85,21 @@ const steps = [
 
 
 
+
+const transformations = [
+  {
+    image: "/images/mark.png",
+    name: "MARK, 61 — BUSINESS OWNER",
+    quote: "At 61 I thought I'd left it too late. Leon adapted everything around my health, kept me accountable every week and gave me a clear plan. My cholesterol dropped significantly, my strength increased every phase and my metabolic age came back at 45."
+  },
+  { image:"/images/vlad.png", name:"VLAD", result:"Built a lean athletic physique."},
+  { image:"/images/sam.png", name:"SAM", result:"Lost over 20kg and kept it off."},
+  { image:"/images/jack.png", name:"JACK", result:"Added muscle while dropping body fat."},
+  { image:"/images/glen.png", name:"GLEN", result:"Finally broke years of stalled progress."},
+  { image:"/images/chris.png", name:"CHRIS", result:"Stopped restarting every Monday."},
+  { image:"/images/caine.png", name:"CAINE", result:"Lost the weight and rebuilt his confidence."}
+];
+
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
     if (onStart) onStart();
