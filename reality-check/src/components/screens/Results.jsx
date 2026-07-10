@@ -25,14 +25,15 @@ function StatCard({ label, children, className = "" }) {
   return (
     <>
       <style>{`.results-scroll::-webkit-scrollbar{display:none;width:0;height:0;}`}</style>
-    <div
-      className={`rounded-2xl border border-white/10 bg-card/95 p-5 shadow-lg shadow-black/10 ${className}`}
-    >
-      <p className="text-xs font-bold uppercase tracking-[0.15em] text-white/40">
-        {label}
-      </p>
-      <div className="mt-2">{children}</div>
-    </div>
+      <div
+        className={`rounded-2xl border border-white/10 bg-card/95 p-5 shadow-lg shadow-black/10 ${className}`}
+      >
+        <p className="text-xs font-bold uppercase tracking-[0.15em] text-white/40">
+          {label}
+        </p>
+        <div className="mt-2">{children}</div>
+      </div>
+    </>
   );
 }
 
