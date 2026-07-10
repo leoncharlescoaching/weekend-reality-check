@@ -97,6 +97,7 @@ const transformations = [
 
 
 
+
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
     if (onStart) onStart();
