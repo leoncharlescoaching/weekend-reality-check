@@ -44,39 +44,39 @@ const deliverables = [
   {
     image: "/images/bullshit-detected.jpg",
     title: "Bullshit Detected™",
-    description: "The truth about what's really holding you back.",
+    description: "No sugar coating. I'm going to tell you exactly what's been holding you back. Even if it's not what you want to hear.",
   },
   {
     image: "/images/weekend-profile.jpg",
     title: "Weekend Profile™",
-    description: "Discover the pattern you keep repeating.",
+    description: "The pattern you've been repeating every single weekend. Identified. Finally.",
   },
   {
     image: "/images/monday-reset.jpg",
     title: "Monday Reset™",
-    description: "Know exactly what to change next weekend.",
+    description: "Exactly what to change next weekend. Simple. Clear. No guessing. No fluff.",
   },
   {
     image: "/images/coaching-breakdown.jpg",
     title: "What I'd Do If You Were My Client™",
-    description: "Experience how I coach before spending a penny.",
+    description: "This is how I actually coach. You get to see it before you spend a single penny.",
   },
 ];
 
 const checklistItems = [
-  "You restart every Monday.",
-  "You lose control every weekend.",
-  "You know what to do.",
-  "You struggle to stay consistent.",
-  "You tell yourself “next week will be different.”",
-  "You want lasting results.",
+  "Every Monday you start again.",
+  "Every weekend you fall apart and undo everything.",
+  "You know what you should be doing but you're still not doing it.",
+  "You've tried loads of things and you're still in the same place.",
+  "You've told yourself next week will be different so many times you don't even believe it anymore.",
+  "You just want something that actually works. For good. Not just for two weeks before it all goes to shit again.",
 ];
 
 const steps = [
-  "Complete the Weekend Reality Check™.",
-  "Receive your personalised coaching breakdown.",
-  "See exactly what I'd change first.",
-  "Start putting it into action.",
+  "Take the Weekend Reality Check™. Under two minutes.",
+  "Get your personalised coaching breakdown.",
+  "See exactly what I'd change first if you were my client.",
+  "Stop repeating the same weekend. Start fixing it.",
 ];
 
 
@@ -127,11 +127,7 @@ export default function LandingPage({ onStart }) {
             </h1>
 
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
-              Every Monday you promise yourself this week will be different.
-              Every Friday proves it won&apos;t be. The Weekend Reality Check
-              <span className="text-neutral-200">™</span> uncovers the habit
-              that&apos;s really holding you back and lets you experience how
-              I&apos;d coach you before you ever become a client.
+              Brother — you&apos;ve been doing the same shit for years. Same cycle. Same excuses. Same result. The Weekend Reality Check<span className="text-neutral-200">™</span> finds exactly what&apos;s been sabotaging you every single weekend and shows you how I&apos;d coach you before you spend a single penny. It&apos;s free. And it&apos;s better than most people&apos;s paid coaching. I mean that.
             </p>
 
             <div className="mt-10">
@@ -177,21 +173,20 @@ export default function LandingPage({ onStart }) {
           </h2>
 
           <div className="mt-8 space-y-3 text-lg leading-relaxed text-neutral-400 sm:text-xl">
-            <p>You already know how to lose weight.</p>
-            <p>You already know protein matters.</p>
-            <p>You already know you should train.</p>
-            <p>You already know weekends matter.</p>
+            <p>You know you should be eating better.</p>
+            <p>You know protein matters.</p>
+            <p>You know you should be training.</p>
+            <p>You know the weekends are where it all goes to shit.</p>
           </div>
 
           <p className="mt-8 text-xl leading-relaxed text-neutral-200">
-            So why do you keep ending up back at square one?
+            So why does it keep happening?
           </p>
 
           <p className="mt-6 text-xl leading-relaxed text-neutral-400">
-            Because your problem isn&apos;t knowledge.{" "}
-            <span className="font-bold text-white">It&apos;s repetition.</span>{" "}
-            Every weekend you repeat the same behaviours. The Weekend Reality
-            Check™ identifies exactly where that cycle begins.
+            It&apos;s not because you&apos;re lazy. It&apos;s not because you don&apos;t care.{" "}
+            <span className="font-bold text-white">It&apos;s because you keep repeating the same pattern every single weekend without even knowing why.</span>{" "}
+            That&apos;s the problem. Not your knowledge. Your pattern. And until someone shows you exactly what that pattern is — nothing changes. Nothing. That&apos;s what I&apos;m going to do.
           </p>
         </motion.div>
       </Section>
@@ -204,8 +199,7 @@ export default function LandingPage({ onStart }) {
 
           <div>
             <p className="text-lg leading-relaxed text-neutral-400 sm:text-xl">
-              Most free quizzes tell you things you already know. The Weekend
-              Reality Check™ doesn&apos;t.
+              I know what you&apos;re thinking. Another quiz that tells me to eat more vegetables and drink more water. Cheers for that mate. This is nothing like that. This is built from the exact same process I use with my paying clients. The ones actually getting results. Most coaches wouldn&apos;t show you this for free because their coaching isn&apos;t good enough to show off. Mine is.
             </p>
 
             <ul className="mt-8 grid gap-4">
@@ -223,7 +217,7 @@ export default function LandingPage({ onStart }) {
             </ul>
 
             <p className="mt-8 text-lg leading-relaxed text-neutral-400 sm:text-xl">
-              This is designed to feel like a genuine coaching review.
+              No bullshit. No watered down version. The actual thing.
             </p>
           </div>
         </motion.div>
@@ -236,9 +230,7 @@ export default function LandingPage({ onStart }) {
           </h2>
 
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
-            These are real screens from the Weekend Reality Check™. No fake
-            examples. No stock images. This is exactly what you&apos;ll
-            experience.
+            Real screens. No bullshit. No stock images. This is exactly what you&apos;ll see when you take it.
           </p>
 
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -290,10 +282,10 @@ export default function LandingPage({ onStart }) {
             </ul>
 
             <p className="mt-10 text-xl leading-relaxed text-neutral-400">
-              If that sounds like you...
+              Sound familiar?
               <br />
               <span className="font-bold text-white">
-                This was built for you.
+                Good. This was built for you mate.
               </span>
             </p>
           </div>
@@ -307,18 +299,17 @@ export default function LandingPage({ onStart }) {
           </h2>
 
           <div className="mt-8 space-y-3 text-lg leading-relaxed text-neutral-400 sm:text-xl">
-            <p>Most people don&apos;t need another meal plan.</p>
-            <p>Most people don&apos;t need another calorie calculator.</p>
-            <p>Most people don&apos;t need more motivation.</p>
+            <p>Most dads don&apos;t need another meal plan. You&apos;ve had meal plans. They didn&apos;t stick.</p>
+            <p>Most dads don&apos;t need another calorie calculator. You&apos;ve counted calories. It didn&apos;t last.</p>
+            <p>Most dads don&apos;t need more motivation. Motivation comes and goes and you know that better than anyone.</p>
           </div>
 
           <p className="mt-8 text-xl leading-relaxed text-neutral-200">
-            They need somebody to identify what&apos;s actually sabotaging them.
+            What you actually need is someone to show you exactly what&apos;s been sabotaging you and tell you straight what to do about it.
           </p>
 
           <p className="mt-6 text-xl leading-relaxed text-neutral-400">
-            That&apos;s exactly what the Weekend Reality Check™ does. It uses
-            the same coaching thinking I use with my paying clients.
+            No fads. No quick fixes. No bullshit. That&apos;s what this does. It&apos;s built from the same process I use with my coaching clients every single week. The dads dropping weight, getting stronger and showing up properly for their kids. Not because they found some magic secret. Because someone finally showed them what was actually stopping them.
           </p>
         </motion.div>
       </Section>
@@ -337,14 +328,13 @@ export default function LandingPage({ onStart }) {
           </p>
 
           <h2 className="mt-4 text-center text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            REAL MEN.
+            REAL DADS.
             <br />
-            REAL TRANSFORMATIONS.
+            REAL RESULTS.
           </h2>
 
           <p className="mx-auto mt-6 max-w-3xl text-center text-lg leading-relaxed text-neutral-400 sm:text-xl">
-            Busy dads. Busy professionals. Real clients who stopped starting
-            again every Monday.
+            Real dads who got sick of starting again every Monday and actually did something about it.
           </p>
 
           <div className="mx-auto mt-16 max-w-5xl overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900 shadow-2xl shadow-black/30">
@@ -434,14 +424,13 @@ export default function LandingPage({ onStart }) {
           </h2>
 
           <div className="mt-8 space-y-2 text-lg leading-relaxed text-neutral-400 sm:text-xl">
-            <p>Take the Weekend Reality Check™.</p>
-            <p>Discover your Weekend Profile™.</p>
-            <p>See your Monday Reset™.</p>
-            <p>Experience how I coach.</p>
+            <p>You&apos;ve been starting again every Monday for long enough.</p>
+            <p>You&apos;re not lazy. You&apos;re not weak. You just haven&apos;t had anyone show you exactly what&apos;s been getting in the way.</p>
+            <p>That ends now.</p>
           </div>
 
           <p className="mt-6 max-w-2xl text-xl leading-relaxed text-neutral-200">
-            Then start changing the weekends that have been holding you back.
+            Take the Weekend Reality Check™. Find out what&apos;s actually been sabotaging you. See exactly what I&apos;d do if you were sat in front of me as a client. Then do something about it for once. Life ain&apos;t gonna calm down and wait for you mate. The right time isn&apos;t Monday. It&apos;s right now.
           </p>
 
           <div className="mt-12">
