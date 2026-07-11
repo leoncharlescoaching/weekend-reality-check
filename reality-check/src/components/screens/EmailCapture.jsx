@@ -4,22 +4,20 @@ import Logo from "../Logo";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// This is the LAST screen in the flow (see data/flow.js — results and the
-// Monday Reset already showed earlier, on screen, in full). This screen is
-// just lead capture (name + email) so Leon can follow up — it does NOT
-// email them their results, since they've already seen everything here.
-const RECAP_BULLETS = [
-  "Your Weekend Score™ and Bullshit Level™",
-  "Your Weekend Profile™",
-  "Your Monday Reset™",
-  "What I'd do first if you were my client",
+// This screen now sits BEFORE "results" in data/flow.js — it gates access
+// to the score, not a save-your-details step after seeing everything. So
+// this is a "what you're about to get" teaser, not a recap.
+const UNLOCK_BULLETS = [
+  "Your exact Weekend Score™ and Bullshit Level™",
+  "What's actually been sabotaging your weekends",
+  "Your Weekend Profile™ — the pattern you keep repeating",
+  "Your Monday Reset™ — exactly what to change next weekend",
 ];
 
 export default function EmailCapture({ onSubmit, onRestart }) {
   const [form, setForm] = useState({ name: "", email: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
 
   const set = (key) => (e) =>
     setForm((prev) => ({ ...prev, [key]: e.target.value }));
@@ -43,10 +41,8 @@ export default function EmailCapture({ onSubmit, onRestart }) {
       // This actually persists the lead — POSTs to a backend endpoint
       // that calls the Mailchimp API server-side. Mailchimp can't be
       // called directly from the browser (CORS + it'd expose your API key).
-      // Just name + email — no results merge fields. Mailchimp rejects
-      // the whole request if you send merge tags that don't exist in the
-      // Audience, and there's no need for them anyway since results are
-      // already shown on screen, not delivered by email.
+      // Just name + email — no merge fields. Mailchimp rejects the whole
+      // request if you send merge tags that don't exist in the Audience.
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -63,43 +59,17 @@ export default function EmailCapture({ onSubmit, onRestart }) {
         );
       }
 
-      // Subscribed successfully. This is the last screen in the flow
-      // (nothing comes after "email" in flow.js), so there's nowhere to
-      // advance to — we show a local success state instead. We still
-      // tell the parent so `answers.email` gets recorded for consistency.
+      // Subscribed successfully. onSubmit is App.jsx's recordEmail, which
+      // now also calls goNext() — so this actually advances to the
+      // Results screen. No local success state needed here; the screen
+      // transition itself is the confirmation.
       await onSubmit(form.email.trim());
-      setSubmitted(true);
     } catch (err) {
       console.error("EmailCapture subscribe error:", err);
       setError(err.message || "Something went wrong. Please try again.");
-    } finally {
       setLoading(false);
     }
   };
-
-  if (submitted) {
-    return (
-      <div className="flex h-full w-full flex-col items-center justify-center px-6 pb-8 pt-10 text-center">
-        <div className="text-5xl">✅</div>
-        <h1 className="mt-4 font-display text-3xl leading-tight text-white">
-          You&apos;re all set.
-        </h1>
-        <p className="mt-3 max-w-xs text-white/50">
-          Got it — <span className="text-white/80">{form.email}</span> is on
-          the list. I'll be in touch personally.
-        </p>
-        {onRestart && (
-          <button
-            type="button"
-            onClick={onRestart}
-            className="mt-8 text-xs text-white/30 underline underline-offset-4"
-          >
-            Start another check
-          </button>
-        )}
-      </div>
-    );
-  }
 
   return (
     <div className="flex h-full w-full flex-col items-center overflow-y-auto px-6 pb-8 pt-10">
@@ -122,18 +92,26 @@ export default function EmailCapture({ onSubmit, onRestart }) {
       <div className="mt-10 h-[3px] w-10 bg-orange" />
 
       <h1 className="mt-8 max-w-xs text-center font-display text-3xl leading-[1.05] text-white sm:text-4xl">
-        Don&apos;t lose this.
+        Your results
+        <br />
+        are ready.
       </h1>
       <p className="mt-3 max-w-xs text-center text-sm leading-relaxed text-white/50">
-        Leave your details and I&apos;ll follow up personally.
+        Enter your details to see your full breakdown.
       </p>
 
       <div className="mt-6 w-full max-w-sm rounded-2xl border border-white/10 bg-card/95 p-5 shadow-lg shadow-black/10">
         <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-orange">
-          What you just found out
+          Average Dad&apos;s Weekend Score™
         </p>
-        <div className="mt-4 flex flex-col gap-2.5">
-          {RECAP_BULLETS.map((item) => (
+        <p className="mt-3 text-center font-display text-5xl leading-none text-orange">
+          42
+        </p>
+        <p className="mt-3 text-center text-sm leading-relaxed text-white/80">
+          If you scored below that — you&apos;ve got work to do.
+        </p>
+        <div className="mt-4 flex flex-col gap-2.5 border-t border-white/10 pt-4">
+          {UNLOCK_BULLETS.map((item) => (
             <div
               key={item}
               className="flex items-center gap-3 text-sm text-white/80"
@@ -172,11 +150,11 @@ export default function EmailCapture({ onSubmit, onRestart }) {
         {error && <p className="mt-2 text-sm text-danger">{error}</p>}
         <div className="mt-4">
           <PrimaryButton type="submit" disabled={loading}>
-            {loading ? "SAVING..." : "SAVE MY RESULTS"}
+            {loading ? "LOADING..." : "SHOW ME MY RESULTS"}
           </PrimaryButton>
         </div>
         <p className="mt-3 text-center text-xs leading-relaxed text-white/40">
-          No spam. No fluff. Just a real follow-up from me.
+          No spam. No fluff. Just your results and what to fix first.
         </p>
       </form>
     </div>
