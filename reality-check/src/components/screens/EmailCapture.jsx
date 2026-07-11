@@ -4,11 +4,14 @@ import Logo from "../Logo";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const RESULT_BULLETS = [
-  "Your exact Weekend Score™ and Bullshit Level™",
-  "What's actually been sabotaging your weekends",
-  "Your Weekend Profile™ — the pattern you keep repeating",
-  "Your Monday Reset™ — exactly what to change next weekend",
+// This is the LAST screen in the flow (see data/flow.js — results and the
+// Monday Reset already showed earlier). So this isn't a paywall gating
+// results the user hasn't seen yet — it's a "save your results / stay in
+// the loop" capture at the end. Copy below reflects that.
+const RECAP_BULLETS = [
+  "Your Weekend Score™ and Bullshit Level™",
+  "Your Weekend Profile™",
+  "Your Monday Reset™",
   "What I'd do first if you were my client",
 ];
 
@@ -16,6 +19,7 @@ export default function EmailCapture({ onSubmit, onRestart }) {
   const [form, setForm] = useState({ name: "", email: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const set = (key) => (e) =>
     setForm((prev) => ({ ...prev, [key]: e.target.value }));
@@ -55,12 +59,12 @@ export default function EmailCapture({ onSubmit, onRestart }) {
         );
       }
 
-      // Subscribed successfully — hand off to the parent to advance
-      // the flow. App.jsx's recordEmail expects a plain email string
-      // (it does setAnswers(current => ({ ...current, email }))), so
-      // we only pass the email here, not the whole {name, email} object.
-      // The name is still captured — it went to Mailchimp above.
+      // Subscribed successfully. This is the last screen in the flow
+      // (nothing comes after "email" in flow.js), so there's nowhere to
+      // advance to — we show a local success state instead. We still
+      // tell the parent so `answers.email` gets recorded for consistency.
       await onSubmit(form.email.trim());
+      setSubmitted(true);
     } catch (err) {
       console.error("EmailCapture subscribe error:", err);
       setError(err.message || "Something went wrong. Please try again.");
@@ -68,6 +72,31 @@ export default function EmailCapture({ onSubmit, onRestart }) {
       setLoading(false);
     }
   };
+
+  if (submitted) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center px-6 pb-8 pt-10 text-center">
+        <div className="text-5xl">✅</div>
+        <h1 className="mt-4 font-display text-3xl leading-tight text-white">
+          You&apos;re all set.
+        </h1>
+        <p className="mt-3 max-w-xs text-white/50">
+          Your Weekend Reality Check™ results are saved to{" "}
+          <span className="text-white/80">{form.email}</span>. I'll be in
+          touch with more like this.
+        </p>
+        {onRestart && (
+          <button
+            type="button"
+            onClick={onRestart}
+            className="mt-8 text-xs text-white/30 underline underline-offset-4"
+          >
+            Start another check
+          </button>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-full w-full flex-col items-center overflow-y-auto px-6 pb-8 pt-10">
@@ -90,27 +119,18 @@ export default function EmailCapture({ onSubmit, onRestart }) {
       <div className="mt-10 h-[3px] w-10 bg-orange" />
 
       <h1 className="mt-8 max-w-xs text-center font-display text-3xl leading-[1.05] text-white sm:text-4xl">
-        Your score is only
-        <br />
-        half the story...
+        Don&apos;t lose this.
       </h1>
       <p className="mt-3 max-w-xs text-center text-sm leading-relaxed text-white/50">
-        Most dads think they&apos;re doing things right. This shows you
-        exactly where you&apos;re not.
+        Save your results and I&apos;ll send you what to do with them.
       </p>
 
       <div className="mt-6 w-full max-w-sm rounded-2xl border border-white/10 bg-card/95 p-5 shadow-lg shadow-black/10">
         <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-orange">
-          Average Dad&apos;s Weekend Score™
+          What you&apos;re saving
         </p>
-        <p className="mt-3 text-center font-display text-5xl leading-none text-orange">
-          42
-        </p>
-        <p className="mt-3 text-center text-sm leading-relaxed text-white/80">
-          If you scored below that — you&apos;ve got work to do.
-        </p>
-        <div className="mt-4 flex flex-col gap-2.5 border-t border-white/10 pt-4">
-          {RESULT_BULLETS.map((item) => (
+        <div className="mt-4 flex flex-col gap-2.5">
+          {RECAP_BULLETS.map((item) => (
             <div
               key={item}
               className="flex items-center gap-3 text-sm text-white/80"
@@ -149,7 +169,7 @@ export default function EmailCapture({ onSubmit, onRestart }) {
         {error && <p className="mt-2 text-sm text-danger">{error}</p>}
         <div className="mt-4">
           <PrimaryButton type="submit" disabled={loading}>
-            {loading ? "SENDING..." : "SHOW ME MY FULL RESULTS"}
+            {loading ? "SAVING..." : "SAVE MY RESULTS"}
           </PrimaryButton>
         </div>
         <p className="mt-3 text-center text-xs leading-relaxed text-white/40">
