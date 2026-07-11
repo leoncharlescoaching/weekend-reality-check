@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { name, email } = req.body || {};
+  const { name, email, score, level, killer, surplus } = req.body || {};
 
   if (!email || typeof email !== "string") {
     return res.status(400).json({ error: "Email is required" });
@@ -52,6 +52,14 @@ export default async function handler(req, res) {
           merge_fields: {
             FNAME: firstName,
             LNAME: lastName,
+            // These four map to custom merge fields you need to create in
+            // Mailchimp (Audience settings > Audience fields and merge
+            // tags) with these exact tags, before an Automation can use
+            // them. See the setup notes below.
+            SCORE: score != null ? String(score) : "",
+            LEVEL: level || "",
+            KILLER: killer || "",
+            SURPLUS: surplus != null ? String(surplus) : "",
           },
         }),
       }
