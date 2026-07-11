@@ -72,6 +72,7 @@ export default function App() {
       ...current,
       email,
     }));
+    goNext();
   };
 
   if (!step) {
