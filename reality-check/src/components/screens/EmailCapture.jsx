@@ -1,85 +1,98 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { PrimaryButton } from "../Buttons";
-import Logo from "../Logo";
+// Vercel serverless function — save as /api/subscribe.js at your project root
+// (adjust the path/export style if you're actually on Netlify, Express, or
+// Next.js — see the note at the bottom).
+//
+// Required environment variables (set in your hosting dashboard, NEVER
+// committed to the repo, NEVER prefixed with VITE_/NEXT_PUBLIC_ since those
+// get exposed to the browser bundle):
+//
+//   MAILCHIMP_API_KEY       — Account > Extras > API keys
+//   MAILCHIMP_AUDIENCE_ID   — Audience > Settings > Audience name and defaults > Audience ID
+//   MAILCHIMP_SERVER_PREFIX — the bit after the dash in your API key, e.g.
+//                             if your key ends "-us21" this is "us21"
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-export default function EmailCapture({ onSubmit, onRestart }) {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const { name, email } = req.body || {};
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!EMAIL_RE.test(email)) {
-      setError("That doesn't look like a real email. Try again.");
-      return;
+  if (!email || typeof email !== "string") {
+    return res.status(400).json({ error: "Email is required" });
+  }
+
+  const API_KEY = process.env.MAILCHIMP_API_KEY;
+  const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID;
+  const SERVER_PREFIX = process.env.MAILCHIMP_SERVER_PREFIX;
+
+  if (!API_KEY || !AUDIENCE_ID || !SERVER_PREFIX) {
+    console.error("Missing Mailchimp environment variables");
+    return res.status(500).json({ error: "Server misconfigured" });
+  }
+
+  const [firstName = "", ...rest] = (name || "").trim().split(" ");
+  const lastName = rest.join(" ");
+
+  try {
+    const mcRes = await fetch(
+      `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic ${Buffer.from(
+            `anystring:${API_KEY}`
+          ).toString("base64")}`,
+        },
+        body: JSON.stringify({
+          email_address: email,
+          status: "subscribed",
+          merge_fields: {
+            FNAME: firstName,
+            LNAME: lastName,
+          },
+        }),
+      }
+    );
+
+    const data = await mcRes.json();
+
+    // Mailchimp returns 400 "Member Exists" if this email is already on
+    // the list. Treat that as success — a returning user shouldn't get
+    // blocked from seeing their results just because they've submitted
+    // the form before.
+    if (!mcRes.ok && data.title !== "Member Exists") {
+      console.error("Mailchimp error:", data);
+      return res
+        .status(500)
+        .json({ error: "Could not save your details. Please try again." });
     }
-    setError("");
-    onSubmit(email);
-    setSubmitted(true);
-  };
 
-  return (
-    <div className="flex h-full w-full flex-col justify-between px-6 pb-8 pt-10">
-      <Logo size="sm" />
-
-      <AnimatePresence mode="wait">
-        {!submitted ? (
-          <motion.div
-            key="form"
-            exit={{ opacity: 0, y: -12 }}
-            className="flex flex-1 flex-col justify-center"
-          >
-            <h1 className="font-display text-3xl leading-[1.05] text-white sm:text-4xl">
-              Where do we send the full breakdown?
-            </h1>
-            <p className="mt-3 text-white/50">
-              Your Weekend Reality Check™ results, saved. No spam, no bullshit.
-            </p>
-
-            <form onSubmit={handleSubmit} className="mt-8">
-              <input
-                type="email"
-                inputMode="email"
-                autoComplete="email"
-                placeholder="you@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-2xl border border-white/15 bg-card px-5 py-4 text-white placeholder:text-white/30"
-              />
-              {error && <p className="mt-2 text-sm text-danger">{error}</p>}
-              <div className="mt-4">
-                <PrimaryButton type="submit">GET MY RESULTS</PrimaryButton>
-              </div>
-            </form>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="confirm"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="flex flex-1 flex-col items-center justify-center text-center"
-          >
-            <div className="text-5xl">✅</div>
-            <h1 className="mt-4 font-display text-3xl leading-tight text-white">
-              Check your inbox.
-            </h1>
-            <p className="mt-3 max-w-xs text-white/50">
-              We've saved your Weekend Reality Check™ to <span className="text-white/80">{email}</span>. No more guessing what's actually going on.
-            </p>
-            <button
-              type="button"
-              onClick={onRestart}
-              className="mt-8 text-xs text-white/30 underline underline-offset-4"
-            >
-              Start another check
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
+    return res.status(200).json({ ok: true });
+  } catch (err) {
+    console.error("Mailchimp request failed:", err);
+    return res
+      .status(500)
+      .json({ error: "Could not save your details. Please try again." });
+  }
 }
+
+/*
+NOT ON VERCEL? Adjust as follows — the Mailchimp logic in the try block
+above stays identical either way:
+
+— Netlify: move this file to netlify/functions/subscribe.js, change the
+  export to `exports.handler = async (event) => { const { name, email } =
+  JSON.parse(event.body); ... return { statusCode: 200, body: JSON.stringify({ ok: true }) }; }`,
+  and point the frontend fetch at "/.netlify/functions/subscribe" instead
+  of "/api/subscribe".
+
+— Express: `app.post("/api/subscribe", async (req, res) => { ...same body... })`
+  — req.body works as-is if you have express.json() middleware enabled.
+
+— Next.js App Router: save as app/api/subscribe/route.js, change the
+  export to `export async function POST(req) { const { name, email } =
+  await req.json(); ... return Response.json({ ok: true }); }`.
+*/
