@@ -164,10 +164,14 @@ export function buildFlow() {
     ...makeDayQuestions("sunday"),
 
     { id: "scan", screen: "scan", type: "scan" },
+
+    // Email capture now gates results — moved ahead of "results" so the
+    // user has to submit their details before they can see their score.
+    { id: "email", screen: "email", type: "email" },
+
     { id: "results", screen: "results", type: "results" },
     { id: "reset", screen: "reset", type: "reset" },
     { id: "cta", screen: "cta", type: "cta" },
-    { id: "email", screen: "email", type: "email" },
   ];
 }
 
