@@ -1,98 +1,161 @@
-// Vercel serverless function — save as /api/subscribe.js at your project root
-// (adjust the path/export style if you're actually on Netlify, Express, or
-// Next.js — see the note at the bottom).
-//
-// Required environment variables (set in your hosting dashboard, NEVER
-// committed to the repo, NEVER prefixed with VITE_/NEXT_PUBLIC_ since those
-// get exposed to the browser bundle):
-//
-//   MAILCHIMP_API_KEY       — Account > Extras > API keys
-//   MAILCHIMP_AUDIENCE_ID   — Audience > Settings > Audience name and defaults > Audience ID
-//   MAILCHIMP_SERVER_PREFIX — the bit after the dash in your API key, e.g.
-//                             if your key ends "-us21" this is "us21"
+import { useState } from "react";
+import { PrimaryButton } from "../Buttons";
+import Logo from "../Logo";
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const { name, email } = req.body || {};
+const RESULT_BULLETS = [
+  "Your exact Weekend Score™ and Bullshit Level™",
+  "What's actually been sabotaging your weekends",
+  "Your Weekend Profile™ — the pattern you keep repeating",
+  "Your Monday Reset™ — exactly what to change next weekend",
+  "What I'd do first if you were my client",
+];
 
-  if (!email || typeof email !== "string") {
-    return res.status(400).json({ error: "Email is required" });
-  }
+export default function EmailCapture({ onSubmit, onRestart }) {
+  const [form, setForm] = useState({ name: "", email: "" });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const API_KEY = process.env.MAILCHIMP_API_KEY;
-  const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID;
-  const SERVER_PREFIX = process.env.MAILCHIMP_SERVER_PREFIX;
+  const set = (key) => (e) =>
+    setForm((prev) => ({ ...prev, [key]: e.target.value }));
 
-  if (!API_KEY || !AUDIENCE_ID || !SERVER_PREFIX) {
-    console.error("Missing Mailchimp environment variables");
-    return res.status(500).json({ error: "Server misconfigured" });
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const [firstName = "", ...rest] = (name || "").trim().split(" ");
-  const lastName = rest.join(" ");
-
-  try {
-    const mcRes = await fetch(
-      `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Basic ${Buffer.from(
-            `anystring:${API_KEY}`
-          ).toString("base64")}`,
-        },
-        body: JSON.stringify({
-          email_address: email,
-          status: "subscribed",
-          merge_fields: {
-            FNAME: firstName,
-            LNAME: lastName,
-          },
-        }),
-      }
-    );
-
-    const data = await mcRes.json();
-
-    // Mailchimp returns 400 "Member Exists" if this email is already on
-    // the list. Treat that as success — a returning user shouldn't get
-    // blocked from seeing their results just because they've submitted
-    // the form before.
-    if (!mcRes.ok && data.title !== "Member Exists") {
-      console.error("Mailchimp error:", data);
-      return res
-        .status(500)
-        .json({ error: "Could not save your details. Please try again." });
+    if (!form.name.trim()) {
+      setError("Enter your name.");
+      return;
+    }
+    if (!EMAIL_RE.test(form.email.trim())) {
+      setError("That doesn't look like a real email. Try again.");
+      return;
     }
 
-    return res.status(200).json({ ok: true });
-  } catch (err) {
-    console.error("Mailchimp request failed:", err);
-    return res
-      .status(500)
-      .json({ error: "Could not save your details. Please try again." });
-  }
+    setError("");
+    setLoading(true);
+
+    try {
+      // This actually persists the lead — POSTs to a backend endpoint
+      // that calls the Mailchimp API server-side. Mailchimp can't be
+      // called directly from the browser (CORS + it'd expose your API key).
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(
+          data.error || "Something went wrong. Please try again."
+        );
+      }
+
+      // Subscribed successfully — hand off to the parent to advance
+      // the flow. App.jsx's recordEmail expects a plain email string
+      // (it does setAnswers(current => ({ ...current, email }))), so
+      // we only pass the email here, not the whole {name, email} object.
+      // The name is still captured — it went to Mailchimp above.
+      await onSubmit(form.email.trim());
+    } catch (err) {
+      console.error("EmailCapture subscribe error:", err);
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex h-full w-full flex-col items-center overflow-y-auto px-6 pb-8 pt-10">
+      <div className="flex w-full items-center justify-between">
+        {onRestart ? (
+          <button
+            type="button"
+            onClick={onRestart}
+            className="rounded-lg border border-white/15 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/60"
+          >
+            Start Over
+          </button>
+        ) : (
+          <span className="w-[52px]" />
+        )}
+        <Logo size="sm" />
+        <span className="w-[52px]" />
+      </div>
+
+      <div className="mt-10 h-[3px] w-10 bg-orange" />
+
+      <h1 className="mt-8 max-w-xs text-center font-display text-3xl leading-[1.05] text-white sm:text-4xl">
+        Your score is only
+        <br />
+        half the story...
+      </h1>
+      <p className="mt-3 max-w-xs text-center text-sm leading-relaxed text-white/50">
+        Most dads think they&apos;re doing things right. This shows you
+        exactly where you&apos;re not.
+      </p>
+
+      <div className="mt-6 w-full max-w-sm rounded-2xl border border-white/10 bg-card/95 p-5 shadow-lg shadow-black/10">
+        <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-orange">
+          Average Dad&apos;s Weekend Score™
+        </p>
+        <p className="mt-3 text-center font-display text-5xl leading-none text-orange">
+          42
+        </p>
+        <p className="mt-3 text-center text-sm leading-relaxed text-white/80">
+          If you scored below that — you&apos;ve got work to do.
+        </p>
+        <div className="mt-4 flex flex-col gap-2.5 border-t border-white/10 pt-4">
+          {RESULT_BULLETS.map((item) => (
+            <div
+              key={item}
+              className="flex items-center gap-3 text-sm text-white/80"
+            >
+              <span className="h-1.5 w-1.5 shrink-0 bg-orange" />
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="mt-6 w-full max-w-sm">
+        <div className="flex flex-col gap-3">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full name"
+            value={form.name}
+            onChange={set("name")}
+            autoComplete="name"
+            disabled={loading}
+            className="w-full rounded-2xl border border-white/15 bg-card px-5 py-4 text-white placeholder:text-white/30 disabled:opacity-60"
+          />
+          <input
+            type="email"
+            name="email"
+            inputMode="email"
+            placeholder="Email address"
+            value={form.email}
+            onChange={set("email")}
+            autoComplete="email"
+            disabled={loading}
+            className="w-full rounded-2xl border border-white/15 bg-card px-5 py-4 text-white placeholder:text-white/30 disabled:opacity-60"
+          />
+        </div>
+        {error && <p className="mt-2 text-sm text-danger">{error}</p>}
+        <div className="mt-4">
+          <PrimaryButton type="submit" disabled={loading}>
+            {loading ? "SENDING..." : "SHOW ME MY FULL RESULTS"}
+          </PrimaryButton>
+        </div>
+        <p className="mt-3 text-center text-xs leading-relaxed text-white/40">
+          No spam. No fluff. Just your results and what to fix first.
+        </p>
+      </form>
+    </div>
+  );
 }
-
-/*
-NOT ON VERCEL? Adjust as follows — the Mailchimp logic in the try block
-above stays identical either way:
-
-— Netlify: move this file to netlify/functions/subscribe.js, change the
-  export to `exports.handler = async (event) => { const { name, email } =
-  JSON.parse(event.body); ... return { statusCode: 200, body: JSON.stringify({ ok: true }) }; }`,
-  and point the frontend fetch at "/.netlify/functions/subscribe" instead
-  of "/api/subscribe".
-
-— Express: `app.post("/api/subscribe", async (req, res) => { ...same body... })`
-  — req.body works as-is if you have express.json() middleware enabled.
-
-— Next.js App Router: save as app/api/subscribe/route.js, change the
-  export to `export async function POST(req) { const { name, email } =
-  await req.json(); ... return Response.json({ ok: true }); }`.
-*/
