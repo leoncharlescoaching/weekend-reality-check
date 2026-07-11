@@ -158,6 +158,7 @@ export default function App() {
         {step.type === "email" && (
           <ScreenShell key="email" noPad direction={direction}>
             <EmailCapture
+              results={results}
               onSubmit={recordEmail}
               onRestart={restart}
             />
