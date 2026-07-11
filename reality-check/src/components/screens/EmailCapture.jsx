@@ -15,7 +15,7 @@ const RECAP_BULLETS = [
   "What I'd do first if you were my client",
 ];
 
-export default function EmailCapture({ onSubmit, onRestart }) {
+export default function EmailCapture({ results, onSubmit, onRestart }) {
   const [form, setForm] = useState({ name: "", email: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -43,12 +43,23 @@ export default function EmailCapture({ onSubmit, onRestart }) {
       // This actually persists the lead — POSTs to a backend endpoint
       // that calls the Mailchimp API server-side. Mailchimp can't be
       // called directly from the browser (CORS + it'd expose your API key).
+      // Same "Nuclear" -> "Critical" relabel Results.jsx applies on screen,
+      // so the email matches what they actually saw.
+      const displayedLevel =
+        results?.bullshitLevel === "Nuclear"
+          ? "Critical"
+          : results?.bullshitLevel;
+
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: form.name.trim(),
           email: form.email.trim(),
+          score: results?.weekendScore ?? "",
+          level: displayedLevel ?? "",
+          killer: results?.biggestKiller ?? "",
+          surplus: results?.surplus ?? "",
         }),
       });
 
