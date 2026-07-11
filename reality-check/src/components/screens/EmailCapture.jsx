@@ -5,9 +5,9 @@ import Logo from "../Logo";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // This is the LAST screen in the flow (see data/flow.js — results and the
-// Monday Reset already showed earlier). So this isn't a paywall gating
-// results the user hasn't seen yet — it's a "save your results / stay in
-// the loop" capture at the end. Copy below reflects that.
+// Monday Reset already showed earlier, on screen, in full). This screen is
+// just lead capture (name + email) so Leon can follow up — it does NOT
+// email them their results, since they've already seen everything here.
 const RECAP_BULLETS = [
   "Your Weekend Score™ and Bullshit Level™",
   "Your Weekend Profile™",
@@ -15,7 +15,7 @@ const RECAP_BULLETS = [
   "What I'd do first if you were my client",
 ];
 
-export default function EmailCapture({ results, onSubmit, onRestart }) {
+export default function EmailCapture({ onSubmit, onRestart }) {
   const [form, setForm] = useState({ name: "", email: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -43,23 +43,16 @@ export default function EmailCapture({ results, onSubmit, onRestart }) {
       // This actually persists the lead — POSTs to a backend endpoint
       // that calls the Mailchimp API server-side. Mailchimp can't be
       // called directly from the browser (CORS + it'd expose your API key).
-      // Same "Nuclear" -> "Critical" relabel Results.jsx applies on screen,
-      // so the email matches what they actually saw.
-      const displayedLevel =
-        results?.bullshitLevel === "Nuclear"
-          ? "Critical"
-          : results?.bullshitLevel;
-
+      // Just name + email — no results merge fields. Mailchimp rejects
+      // the whole request if you send merge tags that don't exist in the
+      // Audience, and there's no need for them anyway since results are
+      // already shown on screen, not delivered by email.
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: form.name.trim(),
           email: form.email.trim(),
-          score: results?.weekendScore ?? "",
-          level: displayedLevel ?? "",
-          killer: results?.biggestKiller ?? "",
-          surplus: results?.surplus ?? "",
         }),
       });
 
@@ -92,9 +85,8 @@ export default function EmailCapture({ results, onSubmit, onRestart }) {
           You&apos;re all set.
         </h1>
         <p className="mt-3 max-w-xs text-white/50">
-          Your Weekend Reality Check™ results are saved to{" "}
-          <span className="text-white/80">{form.email}</span>. I'll be in
-          touch with more like this.
+          Got it — <span className="text-white/80">{form.email}</span> is on
+          the list. I'll be in touch personally.
         </p>
         {onRestart && (
           <button
@@ -133,12 +125,12 @@ export default function EmailCapture({ results, onSubmit, onRestart }) {
         Don&apos;t lose this.
       </h1>
       <p className="mt-3 max-w-xs text-center text-sm leading-relaxed text-white/50">
-        Save your results and I&apos;ll send you what to do with them.
+        Leave your details and I&apos;ll follow up personally.
       </p>
 
       <div className="mt-6 w-full max-w-sm rounded-2xl border border-white/10 bg-card/95 p-5 shadow-lg shadow-black/10">
         <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-orange">
-          What you&apos;re saving
+          What you just found out
         </p>
         <div className="mt-4 flex flex-col gap-2.5">
           {RECAP_BULLETS.map((item) => (
@@ -184,7 +176,7 @@ export default function EmailCapture({ results, onSubmit, onRestart }) {
           </PrimaryButton>
         </div>
         <p className="mt-3 text-center text-xs leading-relaxed text-white/40">
-          No spam. No fluff. Just your results and what to fix first.
+          No spam. No fluff. Just a real follow-up from me.
         </p>
       </form>
     </div>
