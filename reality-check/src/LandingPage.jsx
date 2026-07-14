@@ -52,7 +52,7 @@ const deliverables = [
   {
     image: "/images/coaching-breakdown.png",
     title: "What I'd Do If You Were My Client™",
-    description: "How I actually coach — before you spend a penny.",
+    description: "How I actually coach before you spend a penny.",
   },
 ];
 const checklistItems = [
@@ -72,7 +72,7 @@ const steps = [
 const transformations = [
   {
     image: "/images/mark.png",
-    name: "MARK, 61 — BUSINESS OWNER",
+    name: "MARK, 61 - BUSINESS OWNER",
     quote: "At 61 I thought I'd left it too late. Leon adapted everything around my health, kept me accountable every week and gave me a clear plan. My cholesterol dropped significantly, my strength increased every phase and my metabolic age came back at 45."
   },
   { image:"/images/vlad.png", name:"VLAD", result:"Spent years training without looking like he trained. With structure and accountability he built the lean athletic physique he had always wanted."},
