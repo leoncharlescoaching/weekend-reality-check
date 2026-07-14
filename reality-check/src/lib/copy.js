@@ -28,7 +28,7 @@ export const LOADING_MESSAGES = [
 export const LANDING_COPY = {
   eyebrow: "🚨 Bullshit Detected™",
   headline: "Think your weekends\naren't the problem?",
-  headline2: "Mate — they are.",
+  headline2: "Mate, they are.",
   body: "You've been starting again every Monday for how long now?\nTakes less than 60 seconds to find out exactly what's been holding you back.",
   button: "CALL MY BULLSHIT",
 };
@@ -43,7 +43,7 @@ export const CTA_COPY = {
   ],
   whyTitle: "Why people work with me",
   whyPoints: [
-    "A plan built around your actual life — not some perfect version of it that doesn't exist",
+    "A plan built around your actual life. Not some perfect version of it that doesn't exist",
     "Eat out, have a social life, and still make progress",
     "Someone in your corner before Friday even starts",
     "No obsessing over every calorie",
@@ -147,7 +147,7 @@ export function buildWeekendBreakdown(results) {
 
   // Framed like every other line: a negative number is a credit (you moved,
   // it reduced the surplus). A positive number is a cost (you didn't, and
-  // that cost you calories) — so it gets its own "Inactivity" label rather
+  // that cost you calories) - so it gets its own "Inactivity" label rather
   // than reading like activity somehow earned you calories.
   if (totals.activityNet < 0) {
     items.push({ emoji: "🚶", label: "Activity", display: `−${fmt(Math.abs(totals.activityNet))} kcal` });
@@ -165,7 +165,7 @@ export function buildWeekendBreakdown(results) {
 const CATEGORY_TIP = {
   Alcohol: (day) => `Decide your drink limit before you leave the house next ${day}. Not when you're already out.`,
   Takeaways: (day) => `If you're having a takeaway next ${day}, decide which one now. Don't leave it to a hungry impulse decision.`,
-  Desserts: (day) => `Next ${day} — if dessert isn't planned in advance, it doesn't happen.`,
+  Desserts: (day) => `Next ${day} - if dessert isn't planned in advance, it doesn't happen.`,
   Snacking: (day) => `Plan ${day}'s meals and eat enough at each one. If you're hungry an hour later, the meal wasn't big enough.`,
   "Weekend Inactivity": (day) => `Next ${day} starts with a walk. Get it done before anything else gets in the way.`,
 };
@@ -188,7 +188,7 @@ export function buildMondayResetTips(results) {
     return CLEAN_WEEKEND_TIPS;
   }
 
-  // Always lead with the biggest killer — never let a secondary category
+  // Always lead with the biggest killer and never let a secondary category
   // override it as tip 1. Then find the next highest category that's different
   // from the biggest killer to use as tip 2.
   const primaryCategory =
@@ -227,9 +227,9 @@ export function buildMondayResetTips(results) {
 }
 
 // ---------------------------------------------------------------------------
-// YOUR FIRST CHECK-IN™ — reads like a real Monday-morning message from Leon,
+// YOUR FIRST CHECK-IN™ Reads like a real Monday-morning message from Leon,
 // not a tip list. Three parts: one genuine positive (only ever pulled from a
-// category that's actually clean — never invented), one coached read on the
+// category that's actually clean, never invented), one coached read on the
 // biggest saboteur, and three concrete actions for the coming week. Bucket
 // selection reuses the same Desserts/Poor-Food-Choices disambiguation as the
 // Weekend Profile classification, so features never disagree with each other.
@@ -242,25 +242,25 @@ export const CHECKIN_COPY = {
   ],
   wellTitle: "What you did well",
   heldBackTitle: "What actually held you back",
-  changeTitle: "What you're changing this week — not next week, this week",
+  changeTitle: "What you're changing this week? NOT next week, this week",
   closer: "The goal is simple. Make this weekend better than the last one. That's it. One weekend at a time.",
   dividerHeadline: "This is how dads stop starting again every Monday.",
   dividerBody: [
     "One weekend won't fix everything. I'm not going to tell you it will.",
-    "But fixing the pattern — understanding what's actually been sabotaging you weekend after weekend — that's where everything starts to change.",
+    "But fixing the pattern and understanding what's actually been sabotaging you weekend after weekend. That's where everything starts to change.",
     "That's what coaching does.",
   ],
   ctaButton: "SEE HOW COACHING WORKS →",
   ctaSubtext: "A straight conversation to see if coaching is right for you. No pressure. No pitch.",
 };
 
-// "What you did well" only ever names a category that's genuinely at zero —
+// "What you did well" only ever names a category that's genuinely at zero -
 // never a fabricated achievement. Priority order picks the most impressive
 // clean category first when more than one qualifies.
 const WELL_DONE_LINES = {
   Alcohol: "You kept alcohol out of the weekend completely. That takes real discipline and you delivered it.",
   Takeaways: "Not a single takeaway all weekend. You controlled what went in your mouth and that matters more than most people realise.",
-  Snacking: "No grazing. No mindless eating between meals. You stayed in control of the small stuff — and the small stuff is usually where it all falls apart.",
+  Snacking: "No grazing. No mindless eating between meals. You stayed in control of the small stuff and the small stuff is usually where it all falls apart.",
   "Weekend Inactivity": "You kept moving when it would've been dead easy to park it on the sofa all weekend. That's the difference between people who make progress and people who don't.",
   Desserts: "You didn't touch dessert once across the whole weekend. Easy to overlook but those calories add up fast and you avoided them completely.",
 };
@@ -270,7 +270,7 @@ function buildWellDone(results) {
   for (const cat of WELL_DONE_PRIORITY) {
     if (results.categoryTotals[cat] === 0) return WELL_DONE_LINES[cat];
   }
-  // Nothing came back clean — fall back to something still true and earned:
+  // Nothing came back clean - fall back to something still true and earned:
   // they answered honestly and already know what the issue is.
   const goalLabel = GOAL_LABELS[results.goal] || "make progress";
   return `You said you want to ${goalLabel}. And now you know exactly what's been getting in the way. Most people never get that far. Now do something with it.`;
@@ -278,7 +278,7 @@ function buildWellDone(results) {
 
 const HELD_BACK_LINES = {
   Alcohol: ["The drinks themselves didn't ruin the weekend.", "It was every decision you made after the first one. That's where it went wrong."],
-  Takeaways: ["One takeaway isn't the problem.", "The problem is the moment it becomes permission — permission to have dessert, permission to graze, permission to write off the rest of the weekend. Sound familiar?"],
+  Takeaways: ["One takeaway isn't the problem.", "The problem is the moment it becomes permission and permission to have dessert, permission to graze, permission to write off the rest of the weekend. Sound familiar?"],
   Snacking: ["You're not actually hungry.", "You're eating because food is there and you haven't made a conscious decision not to. That's the habit. And that's what we're fixing."],
   "Weekend Inactivity": ["You're spending Sunday recovering from Saturday instead of resetting for the week ahead.", "By the time Monday comes you're already behind before it's even started."],
 };
@@ -291,7 +291,7 @@ const CHANGE_ACTIONS = {
   ],
   Takeaways: [
     "If you're going to have a takeaway this weekend, decide which one now. Don't leave it to a Friday night impulse when you're tired and hungry.",
-    "Protein first. Whatever you're eating — lead with protein. Every time.",
+    "Protein first. Whatever you're eating and lead with protein. Every time.",
     "Once you've eaten your meal, the kitchen is closed. No second visits. Decision made.",
   ],
   Snacking: [
@@ -373,7 +373,7 @@ const WEEKEND_PROFILES = {
     emoji: "🍺",
     title: "The Social Saboteur",
     description: [
-      "Monday to Friday — you're disciplined. You've got structure. You're doing the work.",
+      "Monday to Friday you're disciplined. You've got structure. You're doing the work.",
       "Then Friday comes and it's like a switch flips.",
       "The weekend becomes permission. Permission to forget your goal. Permission to eat whatever. Permission to drink more than you planned.",
       "It's not the food that's the problem.",
@@ -403,8 +403,8 @@ const WEEKEND_PROFILES = {
     emoji: "🛋️",
     title: "The Weekend Hibernator",
     description: [
-      "Weekdays — you've got structure. You're moving. You're doing the right things.",
-      "Weekends — you go completely horizontal.",
+      "Weekdays you've got structure. You're moving. You're doing the right things.",
+      "Weekends you go completely horizontal.",
       "Two inactive days are cancelling out five productive ones.",
       "And you're wondering why progress is slow.",
       "Your body doesn't need more rest.",
@@ -423,7 +423,7 @@ const WEEKEND_PROFILES = {
       "The problem isn't motivation.",
       "You've got motivation in buckets on a Monday morning.",
       "The problem is the routine you fall back into every single weekend without even realising it.",
-      "Until you break that pattern — and I mean actually break it, not just promise yourself you will — Monday will keep feeling like a fresh start.",
+      "Until you break that pattern and I mean actually break it, not just promise yourself you will. Monday will keep feeling like a fresh start.",
       "Because it will keep needing to be one.",
     ],
   },
@@ -465,7 +465,7 @@ function classifyWeekendProfile(results) {
       return "wrecker";
     case "Desserts":
       // Only read as "grazing" when snacking is genuinely present and
-      // matches or outweighs takeaway — otherwise it's just Wrecker-flavour
+      // matches or outweighs takeaway otherwise it's just Wrecker-flavour
       // indulgence, since Desserts is one of the Wrecker's own triggers too.
       return results.totals.snacks > 0 && results.totals.snacks >= results.totals.takeaway ? "grazer" : "wrecker";
     case "Snacking":
@@ -493,7 +493,7 @@ function buildProfileReasons(key, results) {
   if (key === "restarter") {
     return ["Alcohol", "Takeaways", "Snacking", "Activity"].filter((k) => active[k]).slice(0, 3);
   }
-  // wrecker — no fabricated fallback here: if the only real driver was
+  // wrecker - no fabricated fallback here: if the only real driver was
   // Desserts (which isn't one of the four "why" buckets), the reasons list
   // can legitimately be empty rather than blaming a category at zero.
   return ["Takeaways", "Snacking", "Alcohol"].filter((k) => active[k]).slice(0, 3);
