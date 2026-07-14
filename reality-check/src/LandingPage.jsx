@@ -4,7 +4,6 @@ const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 },
 };
-const viewport = { once: true, amount: 0.25 };
 function CTAButton({ onClick, className = "" }) {
   return (
     <button
@@ -143,7 +142,7 @@ export default function LandingPage({ onStart }) {
         </motion.div>
       </Section>
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="max-w-4xl">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="max-w-4xl">
           <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             WHY YOU KEEP STARTING AGAIN EVERY MONDAY
           </h2>
@@ -164,7 +163,7 @@ export default function LandingPage({ onStart }) {
         </motion.div>
       </Section>
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">
             THIS ISN&apos;T ANOTHER FREE QUIZ.
           </h2>
@@ -192,7 +191,7 @@ export default function LandingPage({ onStart }) {
         </motion.div>
       </Section>
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
           <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             HERE&apos;S EXACTLY WHAT YOU&apos;LL GET
           </h2>
@@ -204,8 +203,8 @@ export default function LandingPage({ onStart }) {
               <motion.div
                 key={title}
                 initial="hidden"
-                whileInView="visible"
-                viewport={viewport}
+                animate="visible"
+               
                 variants={fadeUp}
                 transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
                 className="rounded-3xl border border-neutral-800 bg-neutral-900 p-8 shadow-lg shadow-black/20"
@@ -229,7 +228,7 @@ export default function LandingPage({ onStart }) {
         </motion.div>
       </Section>
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">
             YOU&apos;LL RECOGNISE YOURSELF IF...
           </h2>
@@ -253,7 +252,7 @@ export default function LandingPage({ onStart }) {
         </motion.div>
       </Section>
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="max-w-4xl">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="max-w-4xl">
           <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             WHY THIS WORKS
           </h2>
@@ -273,8 +272,8 @@ export default function LandingPage({ onStart }) {
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
         <motion.div
           initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
+          animate="visible"
+         
           variants={fadeUp}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
@@ -342,7 +341,7 @@ export default function LandingPage({ onStart }) {
       </Section>
 
 <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
           <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             WHAT HAPPENS NEXT?
           </h2>
@@ -361,7 +360,7 @@ export default function LandingPage({ onStart }) {
         </motion.div>
       </Section>
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="rounded-3xl border border-neutral-800 bg-neutral-900 p-8 shadow-2xl shadow-black/30 sm:p-12 lg:p-16">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="rounded-3xl border border-neutral-800 bg-neutral-900 p-8 shadow-2xl shadow-black/30 sm:p-12 lg:p-16">
           <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             READY TO FIND OUT WHAT&apos;S REALLY HOLDING YOU BACK?
           </h2>
