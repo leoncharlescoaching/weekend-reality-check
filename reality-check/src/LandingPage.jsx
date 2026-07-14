@@ -52,7 +52,7 @@ const deliverables = [
   {
     image: "/images/coaching-breakdown.png",
     title: "What I'd Do If You Were My Client™",
-    description: "How I actually coach before you spend a penny.",
+    description: "How I actually coach — before you spend a penny.",
   },
 ];
 const checklistItems = [
@@ -72,33 +72,19 @@ const steps = [
 const transformations = [
   {
     image: "/images/mark.png",
-    name: "MARK, 61 - BUSINESS OWNER",
+    name: "MARK, 61 — BUSINESS OWNER",
     quote: "At 61 I thought I'd left it too late. Leon adapted everything around my health, kept me accountable every week and gave me a clear plan. My cholesterol dropped significantly, my strength increased every phase and my metabolic age came back at 45."
   },
   { image:"/images/vlad.png", name:"VLAD", result:"Spent years training without looking like he trained. With structure and accountability he built the lean athletic physique he had always wanted."},
-  { image:"/images/sam.png", name:"SAM", result:"Stopped restarting every Monday, fixed the habits holding him back and lost over 20kg."},
+  { image:"/images/sam.png", name:"SAM", result:"Dad of two. Plumber. Wanted to be in shape for his 30th — lost 20kg and got there."},
   { image:"/images/jack.png", name:"JACK", result:"Stopped guessing in the gym and finally built muscle while dropping body fat."},
-  { image:"/images/glen.png", name:"GLEN", result:"After years of spinning his wheels he finally made consistent progress."},
+  { image:"/images/cobey.png", name:"COBEY", result:"Lost 40kg."},
   { image:"/images/chris.png", name:"CHRIS", result:"Turned inconsistency into routine through simple coaching and accountability."},
   { image:"/images/caine.png", name:"CAINE", result:"Built habits that lasted and transformed both his physique and confidence."}
 ];
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
     if (onStart) onStart();
-  };
-  // Testing convenience only — clears saved quiz progress (rc_step,
-  // rc_answers, rc_units) and reloads to a fresh landing page. Not meant
-  // to be a real user-facing feature, just an easy way to re-test the
-  // flow from scratch without opening incognito each time.
-  const handleReset = () => {
-    try {
-      window.localStorage.removeItem("rc_step");
-      window.localStorage.removeItem("rc_answers");
-      window.localStorage.removeItem("rc_units");
-    } catch {
-      // ignore — storage unavailable
-    }
-    window.location.reload();
   };
   return (
     <main className="min-h-screen w-full overflow-x-hidden bg-neutral-950 text-neutral-100 antialiased">
@@ -120,7 +106,7 @@ export default function LandingPage({ onStart }) {
               EVERY MONDAY<span className="text-[#ff6a00]">™</span>
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
-              Brother... same cycle every weekend, same excuses and same result. Take the free Weekend Reality Check<span className="text-neutral-200">™</span> and find out exactly what&apos;s sabotaging you. Under 2 minutes.
+              Brother — same cycle every weekend, same excuses, same result. Take the free Weekend Reality Check<span className="text-neutral-200">™</span> and find out exactly what&apos;s sabotaging you. Under 2 minutes.
             </p>
             <div className="mt-10">
               <CTAButton onClick={goToRealityCheck} />
@@ -343,13 +329,6 @@ export default function LandingPage({ onStart }) {
       <footer className="border-t border-neutral-900 py-10">
         <div className="mx-auto w-full max-w-6xl px-6 text-center text-sm text-neutral-600 sm:px-10 lg:px-12">
           © {new Date().getFullYear()} Leon Charles. All rights reserved.
-          <button
-            type="button"
-            onClick={handleReset}
-            className="ml-4 text-neutral-700 underline decoration-dotted underline-offset-4 hover:text-neutral-500"
-          >
-            Reset progress
-          </button>
         </div>
       </footer>
     </main>
