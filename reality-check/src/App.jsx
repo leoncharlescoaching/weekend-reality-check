@@ -170,10 +170,7 @@ export default function App() {
 
         {step.type === "cta" && (
           <ScreenShell key="cta" noPad direction={direction}>
-            <CoachingCTA
-              onContinue={goNext}
-              onSkip={goNext}
-            />
+            <CoachingCTA onSkip={goNext} />
           </ScreenShell>
         )}
 
