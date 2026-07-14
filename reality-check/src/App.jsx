@@ -79,12 +79,33 @@ export default function App() {
     return null;
   }
 
+  // Testing convenience — shows on every screen so you're never stuck
+  // mid-flow with no way back to the start (localStorage persists
+  // rc_step/rc_answers across reloads, which is otherwise invisible
+  // and confusing when testing). Wired to the existing restart() so it's
+  // an instant state reset, not a hard page reload.
+  const resetButton = (
+    <button
+      type="button"
+      onClick={restart}
+      className="fixed bottom-3 right-3 z-50 rounded-full border border-white/10 bg-black/60 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white/50 backdrop-blur hover:text-white/80"
+    >
+      Reset
+    </button>
+  );
+
   if (step.type === "landing") {
-    return <LandingPage onStart={goNext} />;
+    return (
+      <>
+        <LandingPage onStart={goNext} />
+        {resetButton}
+      </>
+    );
   }
 
   return (
     <div className="relative mx-auto flex h-svh max-w-md flex-col overflow-hidden bg-bg">
+      {resetButton}
       <AnimatePresence
         initial={false}
         custom={direction}
