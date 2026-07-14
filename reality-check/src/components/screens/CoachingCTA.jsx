@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { PrimaryButton, GhostButton } from "../Buttons";
 import { CTA_COPY, BOOKING_URL } from "../../lib/copy";
 
@@ -21,19 +20,14 @@ function CheckItem({ text, index }) {
   );
 }
 
-export default function CoachingCTA() {
-  // This is the actual end of the funnel now that results are delivered
-  // right after email capture — there's no further in-app screen to
-  // advance to. The primary CTA opens the real booking link directly
-  // instead of trying to call a next step that no longer exists.
+export default function CoachingCTA({ onViewResults }) {
+  // There's no further in-app screen after this one, so the primary CTA
+  // opens the real booking link directly instead of trying to advance to
+  // a next step that no longer exists. "Not ready yet" jumps back to the
+  // Results screen instead of ending the interaction.
   const handleBookCall = () => {
     window.open(BOOKING_URL, "_blank", "noopener,noreferrer");
   };
-
-  // "Not ready yet" doesn't navigate anywhere — they've already given
-  // their email, so nothing is lost by ending the interaction gracefully
-  // in place rather than routing them off-site.
-  const [dismissed, setDismissed] = useState(false);
 
   return (
     <div className="flex h-full w-full flex-col overflow-y-auto no-scrollbar px-6 pb-8 pt-10 text-center">
@@ -105,32 +99,10 @@ export default function CoachingCTA() {
         transition={{ delay: 0.56, duration: 0.4 }}
         className="mt-8"
       >
-        <AnimatePresence mode="wait">
-          {dismissed ? (
-            <motion.p
-              key="closer"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="rounded-2xl border border-white/10 bg-card px-5 py-6 text-sm leading-relaxed text-white/70"
-            >
-              {CTA_COPY.skipCloser}
-            </motion.p>
-          ) : (
-            <motion.div
-              key="buttons"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <PrimaryButton onClick={handleBookCall}>{CTA_COPY.button}</PrimaryButton>
-              <GhostButton onClick={() => setDismissed(true)} className="mt-3">
-                {CTA_COPY.skip}
-              </GhostButton>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <PrimaryButton onClick={handleBookCall}>{CTA_COPY.button}</PrimaryButton>
+        <GhostButton onClick={onViewResults} className="mt-3">
+          {CTA_COPY.skip}
+        </GhostButton>
         <div className="mt-4 space-y-0.5">
           {CTA_COPY.disclaimer.map((line, i) => (
             <p key={i} className="text-xs text-white/30">
