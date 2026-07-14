@@ -250,7 +250,7 @@ export const CHECKIN_COPY = {
     "But fixing the pattern — understanding what's actually been sabotaging you weekend after weekend — that's where everything starts to change.",
     "That's what coaching does.",
   ],
-  ctaButton: "GET MY WEEKEND STRATEGY →",
+  ctaButton: "SEE HOW COACHING WORKS →",
   ctaSubtext: "A straight conversation to see if coaching is right for you. No pressure. No pitch.",
 };
 
