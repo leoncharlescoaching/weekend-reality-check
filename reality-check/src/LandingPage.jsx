@@ -120,7 +120,7 @@ export default function LandingPage({ onStart }) {
               EVERY MONDAY<span className="text-[#ff6a00]">™</span>
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
-              Brother — same cycle every weekend, same excuses, same result. Take the free Weekend Reality Check<span className="text-neutral-200">™</span> and find out exactly what&apos;s sabotaging you. Under 2 minutes.
+              Brother, same cycle every weekend, same excuses and same result. Take the free Weekend Reality Check<span className="text-neutral-200">™</span> and find out exactly what&apos;s sabotaging you. Under 2 minutes.
             </p>
             <div className="mt-10">
               <CTAButton onClick={goToRealityCheck} />
