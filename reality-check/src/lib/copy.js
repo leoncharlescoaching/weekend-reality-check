@@ -64,7 +64,6 @@ export const CTA_COPY = {
     "No hard sell.",
     "Just a straight conversation to see if we're a good fit.",
   ],
-  skipCloser: "No worries. No pressure — I'll be here when you're ready.",
 };
 
 export const MONDAY_RESET_HEADLINE = "Monday Reset™";
