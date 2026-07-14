@@ -4,6 +4,12 @@
 
 import { CLEAN_WEEKEND_LABEL } from "./scoring.js";
 
+// Real, live Calendly link — the CoachingCTA screen's primary button opens
+// this directly. This is the actual end of the funnel now that results are
+// delivered post-email-capture; there's no further in-app step after this.
+export const BOOKING_URL =
+  "https://calendly.com/lookgoodfitnessltd/discoverycall";
+
 export const GOAL_LABELS = {
   lose_fat: "lose fat",
   build_muscle: "build muscle",
@@ -51,7 +57,7 @@ export const CTA_COPY = {
     "Food isn't controlling you anymore. You're controlling it.",
     "You're actually making progress. Consistent progress. Every single week.",
   ],
-  button: "GET MY WEEKEND STRATEGY →",
+  button: "BOOK MY FREE CALL →",
   skip: "Not ready yet",
   disclaimer: [
     "No pressure.",
