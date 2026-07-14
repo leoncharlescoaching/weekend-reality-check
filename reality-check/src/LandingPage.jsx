@@ -79,8 +79,8 @@ const transformations = [
   { image:"/images/sam.png", name:"SAM", result:"Dad of two. Plumber. Wanted to be in shape for his 30th — lost 20kg and got there."},
   { image:"/images/jack.png", name:"JACK", result:"Stopped guessing in the gym and finally built muscle while dropping body fat."},
   { image:"/images/cobey.png", name:"COBEY", result:"Lost 40kg."},
-  { image:"/images/chris.png", name:"CHRIS", result:"Turned inconsistency into routine through simple coaching and accountability."},
-  { image:"/images/caine.png", name:"CAINE", result:"Built habits that lasted and transformed both his physique and confidence."}
+  { image:"/images/chris.png", name:"CHRIS", result:"Over 50 and prepping for a bodybuilding competition."},
+  { image:"/images/caine.png", name:"CAINE", result:"4 years sober, ran a marathon — signed up the moment he felt himself slipping again."}
 ];
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
