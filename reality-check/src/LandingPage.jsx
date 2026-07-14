@@ -37,31 +37,31 @@ const deliverables = [
   {
     image: "/images/bullshit-detected.png",
     title: "Bullshit Detected™",
-    description: "No sugar coating. I'm going to tell you exactly what's been holding you back. Even if it's not what you want to hear.",
+    description: "No sugar coating. What's been holding you back, in plain English.",
   },
   {
     image: "/images/weekend-profile.png",
     title: "Weekend Profile™",
-    description: "The pattern you've been repeating every single weekend. Identified. Finally.",
+    description: "The pattern you've been repeating every weekend. Identified.",
   },
   {
     image: "/images/monday-reset.png",
     title: "Monday Reset™",
-    description: "Exactly what to change next weekend. Simple. Clear. No guessing. No fluff.",
+    description: "Exactly what to change next weekend. No guessing.",
   },
   {
     image: "/images/coaching-breakdown.png",
     title: "What I'd Do If You Were My Client™",
-    description: "This is how I actually coach. You get to see it before you spend a single penny.",
+    description: "How I actually coach — before you spend a penny.",
   },
 ];
 const checklistItems = [
   "Every Monday you start again.",
   "Every weekend you fall apart and undo everything.",
-  "You know what you should be doing but you're still not doing it.",
+  "You know what to do but you're still not doing it.",
   "You've tried loads of things and you're still in the same place.",
-  "You've told yourself next week will be different so many times you don't even believe it anymore.",
-  "You just want something that actually works. For good. Not just for two weeks before it all goes to shit again.",
+  "You've told yourself next week will be different too many times to count.",
+  "You want something that works for good, not just two weeks.",
 ];
 const steps = [
   "Take the Weekend Reality Check™. Under two minutes.",
@@ -106,7 +106,7 @@ export default function LandingPage({ onStart }) {
               EVERY MONDAY<span className="text-[#ff6a00]">™</span>
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
-              Brother — you&apos;ve been doing the same shit for years. Same cycle. Same excuses. Same result. The Weekend Reality Check<span className="text-neutral-200">™</span> finds exactly what&apos;s been sabotaging you every single weekend and shows you how I&apos;d coach you before you spend a single penny. It&apos;s free. And it&apos;s better than most people&apos;s paid coaching. I mean that.
+              Brother — same cycle every weekend, same excuses, same result. Take the free Weekend Reality Check<span className="text-neutral-200">™</span> and find out exactly what&apos;s sabotaging you. Under 2 minutes.
             </p>
             <div className="mt-10">
               <CTAButton onClick={goToRealityCheck} />
@@ -141,139 +141,11 @@ export default function LandingPage({ onStart }) {
           </div>
         </motion.div>
       </Section>
-      <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="max-w-4xl">
-          <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            WHY YOU KEEP STARTING AGAIN EVERY MONDAY
-          </h2>
-          <div className="mt-8 space-y-3 text-lg leading-relaxed text-neutral-400 sm:text-xl">
-            <p>You know you should be eating better.</p>
-            <p>You know protein matters.</p>
-            <p>You know you should be training.</p>
-            <p>You know the weekends are where it all goes to shit.</p>
-          </div>
-          <p className="mt-8 text-xl leading-relaxed text-neutral-200">
-            So why does it keep happening?
-          </p>
-          <p className="mt-6 text-xl leading-relaxed text-neutral-400">
-            It&apos;s not because you&apos;re lazy. It&apos;s not because you don&apos;t care.{" "}
-            <span className="font-bold text-white">It&apos;s because you keep repeating the same pattern every single weekend without even knowing why.</span>{" "}
-            That&apos;s the problem. Not your knowledge. Your pattern. And until someone shows you exactly what that pattern is — nothing changes. Nothing. That&apos;s what I&apos;m going to do.
-          </p>
-        </motion.div>
-      </Section>
-      <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">
-            THIS ISN&apos;T ANOTHER FREE QUIZ.
-          </h2>
-          <div>
-            <p className="text-lg leading-relaxed text-neutral-400 sm:text-xl">
-              I know what you&apos;re thinking. Another quiz that tells me to eat more vegetables and drink more water. Cheers for that mate. This is nothing like that. This is built from the exact same process I use with my paying clients. The ones actually getting results. Most coaches wouldn&apos;t show you this for free because their coaching isn&apos;t good enough to show off. Mine is.
-            </p>
-            <ul className="mt-8 grid gap-4">
-              {[
-                "Your biggest weekend saboteur.",
-                "Your Weekend Profile™.",
-                "Your Monday Reset™.",
-                "What I'd Do If You Were My Client™.",
-              ].map((item) => (
-                <li key={item} className="rounded-2xl border border-neutral-800 bg-neutral-900 px-6 py-5 text-lg font-semibold text-neutral-200">
-                  <span className="mr-3 text-[#ff6a00]">•</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-8 text-lg leading-relaxed text-neutral-400 sm:text-xl">
-              No bullshit. No watered down version. The actual thing.
-            </p>
-          </div>
-        </motion.div>
-      </Section>
-      <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
-          <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            HERE&apos;S EXACTLY WHAT YOU&apos;LL GET
-          </h2>
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
-            Real screens. No bullshit. No stock images. This is exactly what you&apos;ll see when you take it.
-          </p>
-          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {deliverables.map(({ image, title, description }, i) => (
-              <motion.div
-                key={title}
-                initial="hidden"
-                animate="visible"
-               
-                variants={fadeUp}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
-                className="rounded-3xl border border-neutral-800 bg-neutral-900 p-8 shadow-lg shadow-black/20"
-              >
-                <div className="mb-7 aspect-[3/4] overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950">
-                  <img
-                    src={image}
-                    alt={title}
-                    className="h-full w-full object-contain"
-                  />
-                </div>
-                <h3 className="text-2xl font-black tracking-tight text-white">
-                  {title}
-                </h3>
-                <p className="mt-3 text-lg leading-relaxed text-neutral-400">
-                  {description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </Section>
-      <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">
-            YOU&apos;LL RECOGNISE YOURSELF IF...
-          </h2>
-          <div>
-            <ul className="grid gap-4 sm:grid-cols-2">
-              {checklistItems.map((item) => (
-                <li key={item} className="rounded-2xl border border-neutral-800 bg-neutral-900 px-5 py-4 text-base text-neutral-200">
-                  <span className="mr-3 font-bold text-[#ff6a00]">✓</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-10 text-xl leading-relaxed text-neutral-400">
-              Sound familiar?
-              <br />
-              <span className="font-bold text-white">
-                Good. This was built for you mate.
-              </span>
-            </p>
-          </div>
-        </motion.div>
-      </Section>
-      <Section className="border-t border-neutral-900 py-24 sm:py-32">
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="max-w-4xl">
-          <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            WHY THIS WORKS
-          </h2>
-          <div className="mt-8 space-y-3 text-lg leading-relaxed text-neutral-400 sm:text-xl">
-            <p>Most dads don&apos;t need another meal plan. You&apos;ve had meal plans. They didn&apos;t stick.</p>
-            <p>Most dads don&apos;t need another calorie calculator. You&apos;ve counted calories. It didn&apos;t last.</p>
-            <p>Most dads don&apos;t need more motivation. Motivation comes and goes and you know that better than anyone.</p>
-          </div>
-          <p className="mt-8 text-xl leading-relaxed text-neutral-200">
-            What you actually need is someone to show you exactly what&apos;s been sabotaging you and tell you straight what to do about it.
-          </p>
-          <p className="mt-6 text-xl leading-relaxed text-neutral-400">
-            No fads. No quick fixes. No bullshit. That&apos;s what this does. It&apos;s built from the same process I use with my coaching clients every single week. The dads dropping weight, getting stronger and showing up properly for their kids. Not because they found some magic secret. Because someone finally showed them what was actually stopping them.
-          </p>
-        </motion.div>
-      </Section>
+
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
         <motion.div
           initial="hidden"
           animate="visible"
-         
           variants={fadeUp}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
@@ -337,10 +209,91 @@ export default function LandingPage({ onStart }) {
               </div>
             ))}
           </div>
+          <div className="mt-14 flex justify-center">
+            <CTAButton onClick={goToRealityCheck} />
+          </div>
         </motion.div>
       </Section>
 
-<Section className="border-t border-neutral-900 py-24 sm:py-32">
+      <Section className="border-t border-neutral-900 py-24 sm:py-32">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="max-w-4xl">
+          <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            IT&apos;S NOT WILLPOWER. IT&apos;S THE PATTERN.
+          </h2>
+          <p className="mt-8 text-xl leading-relaxed text-neutral-200">
+            You know what to do. You&apos;ve had the meal plans, counted the calories, found the motivation and lost it again.
+          </p>
+          <p className="mt-6 text-xl leading-relaxed text-neutral-400">
+            That&apos;s not the problem.{" "}
+            <span className="font-bold text-white">You&apos;re repeating the same weekend pattern without knowing it</span>{" "}
+            — and nobody&apos;s ever shown you what it actually is. That&apos;s what this does. Built from the same process I use with paying clients. No fluff, no filler.
+          </p>
+        </motion.div>
+      </Section>
+
+      <Section className="border-t border-neutral-900 py-24 sm:py-32">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
+          <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            HERE&apos;S EXACTLY WHAT YOU&apos;LL GET
+          </h2>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
+            Real screens. No stock images. This is exactly what you&apos;ll see when you take it.
+          </p>
+          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {deliverables.map(({ image, title, description }, i) => (
+              <motion.div
+                key={title}
+                initial="hidden"
+                animate="visible"
+                variants={fadeUp}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
+                className="rounded-3xl border border-neutral-800 bg-neutral-900 p-8 shadow-lg shadow-black/20"
+              >
+                <div className="mb-7 aspect-[3/4] overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950">
+                  <img
+                    src={image}
+                    alt={title}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <h3 className="text-2xl font-black tracking-tight text-white">
+                  {title}
+                </h3>
+                <p className="mt-3 text-lg leading-relaxed text-neutral-400">
+                  {description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </Section>
+
+      <Section className="border-t border-neutral-900 py-24 sm:py-32">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <h2 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">
+            YOU&apos;LL RECOGNISE YOURSELF IF...
+          </h2>
+          <div>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              {checklistItems.map((item) => (
+                <li key={item} className="rounded-2xl border border-neutral-800 bg-neutral-900 px-5 py-4 text-base text-neutral-200">
+                  <span className="mr-3 font-bold text-[#ff6a00]">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-10 text-xl leading-relaxed text-neutral-400">
+              Sound familiar?
+              <br />
+              <span className="font-bold text-white">
+                Good. This was built for you mate.
+              </span>
+            </p>
+          </div>
+        </motion.div>
+      </Section>
+
+      <Section className="border-t border-neutral-900 py-24 sm:py-32">
         <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
           <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             WHAT HAPPENS NEXT?
@@ -359,18 +312,14 @@ export default function LandingPage({ onStart }) {
           </div>
         </motion.div>
       </Section>
+
       <Section className="border-t border-neutral-900 py-24 sm:py-32">
         <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }} className="rounded-3xl border border-neutral-800 bg-neutral-900 p-8 shadow-2xl shadow-black/30 sm:p-12 lg:p-16">
           <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             READY TO FIND OUT WHAT&apos;S REALLY HOLDING YOU BACK?
           </h2>
-          <div className="mt-8 space-y-2 text-lg leading-relaxed text-neutral-400 sm:text-xl">
-            <p>You&apos;ve been starting again every Monday for long enough.</p>
-            <p>You&apos;re not lazy. You&apos;re not weak. You just haven&apos;t had anyone show you exactly what&apos;s been getting in the way.</p>
-            <p>That ends now.</p>
-          </div>
           <p className="mt-6 max-w-2xl text-xl leading-relaxed text-neutral-200">
-            Take the Weekend Reality Check™. Find out what&apos;s actually been sabotaging you. See exactly what I&apos;d do if you were sat in front of me as a client. Then do something about it for once. Life ain&apos;t gonna calm down and wait for you mate. The right time isn&apos;t Monday. It&apos;s right now.
+            Take the Weekend Reality Check™. Find out what&apos;s actually sabotaging you, and see exactly what I&apos;d do if you were sat in front of me as a client.
           </p>
           <div className="mt-12">
             <CTAButton onClick={goToRealityCheck} />
