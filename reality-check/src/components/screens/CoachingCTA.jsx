@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { PrimaryButton, GhostButton } from "../Buttons";
-import { CTA_COPY } from "../../lib/copy";
+import { CTA_COPY, BOOKING_URL } from "../../lib/copy";
 
 function CheckItem({ text, index }) {
   return (
@@ -20,7 +20,15 @@ function CheckItem({ text, index }) {
   );
 }
 
-export default function CoachingCTA({ onContinue, onSkip }) {
+export default function CoachingCTA({ onSkip }) {
+  // This is the actual end of the funnel now that results are delivered
+  // right after email capture — there's no further in-app screen to
+  // advance to. The primary CTA opens the real booking link directly
+  // instead of trying to call a next step that no longer exists.
+  const handleBookCall = () => {
+    window.open(BOOKING_URL, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <div className="flex h-full w-full flex-col overflow-y-auto no-scrollbar px-6 pb-8 pt-10 text-center">
       <motion.h1
@@ -91,7 +99,7 @@ export default function CoachingCTA({ onContinue, onSkip }) {
         transition={{ delay: 0.56, duration: 0.4 }}
         className="mt-8"
       >
-        <PrimaryButton onClick={onContinue}>{CTA_COPY.button}</PrimaryButton>
+        <PrimaryButton onClick={handleBookCall}>{CTA_COPY.button}</PrimaryButton>
         <GhostButton onClick={onSkip} className="mt-3">
           {CTA_COPY.skip}
         </GhostButton>
