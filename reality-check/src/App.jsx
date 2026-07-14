@@ -59,6 +59,15 @@ export default function App() {
     setStepIndex(1);
   };
 
+  // "Not ready yet" on the final CTA screen jumps straight back to the
+  // Results screen rather than ending the interaction or navigating away
+  // — keeps them looking at their own data instead of losing them.
+  const goToResults = () => {
+    setDirection(-1);
+    const resultsIndex = flow.findIndex((item) => item.type === "results");
+    if (resultsIndex !== -1) setStepIndex(resultsIndex);
+  };
+
   const recordAndAdvance = (field, value) => {
     setAnswers((current) => ({
       ...current,
@@ -170,7 +179,7 @@ export default function App() {
 
         {step.type === "cta" && (
           <ScreenShell key="cta" noPad direction={direction}>
-            <CoachingCTA />
+            <CoachingCTA onViewResults={goToResults} />
           </ScreenShell>
         )}
 
