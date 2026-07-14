@@ -86,6 +86,20 @@ export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
     if (onStart) onStart();
   };
+  // Testing convenience only — clears saved quiz progress (rc_step,
+  // rc_answers, rc_units) and reloads to a fresh landing page. Not meant
+  // to be a real user-facing feature, just an easy way to re-test the
+  // flow from scratch without opening incognito each time.
+  const handleReset = () => {
+    try {
+      window.localStorage.removeItem("rc_step");
+      window.localStorage.removeItem("rc_answers");
+      window.localStorage.removeItem("rc_units");
+    } catch {
+      // ignore — storage unavailable
+    }
+    window.location.reload();
+  };
   return (
     <main className="min-h-screen w-full overflow-x-hidden bg-neutral-950 text-neutral-100 antialiased">
       <Section className="pt-20 pb-20 sm:pt-28 sm:pb-24 lg:pt-32 lg:pb-28">
@@ -329,6 +343,13 @@ export default function LandingPage({ onStart }) {
       <footer className="border-t border-neutral-900 py-10">
         <div className="mx-auto w-full max-w-6xl px-6 text-center text-sm text-neutral-600 sm:px-10 lg:px-12">
           © {new Date().getFullYear()} Leon Charles. All rights reserved.
+          <button
+            type="button"
+            onClick={handleReset}
+            className="ml-4 text-neutral-700 underline decoration-dotted underline-offset-4 hover:text-neutral-500"
+          >
+            Reset progress
+          </button>
         </div>
       </footer>
     </main>
