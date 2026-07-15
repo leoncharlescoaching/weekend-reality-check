@@ -77,13 +77,13 @@ const transformations = [
   },
   { image:"/images/Ben.png", name:"BEN", result:"Trained for years. Never had the physique to show for it. Finally built it."},
   { image:"/images/Bret.png", name:"BRET", result:"Turning 30. Vegas already booked. Didn't want to be the guy who let himself go before it."},
-  { image:"/images/Caine.png", name:"CAINE", result:"4 years sober. Ran a marathon. Then felt himself slipping again — and didn't let it get any further."},
+  { image:"/images/Caine.png", name:"CAINE", result:"4 years sober. Ran a marathon. Then felt himself slipping again and didn't let it get any further."},
   { image:"/images/Chris.png", name:"CHRIS", result:"50 years old, trained his whole life, decided average wasn't good enough anymore. Stepped on a bodybuilding stage."},
   { image:"/images/Cobey.png", name:"COBEY", result:"Overweight and sick of it. Tried to fix it alone for years. Stopped trying alone."},
   { image:"/images/jack.png", name:"JACK", result:"Had never seen his own abs. Not once. Wasn't walking into another holiday without them."},
-  { image:"/images/James.png", name:"JAMES", result:"Trained for years. A different plan every time. Nothing to show for it — until he stopped guessing."},
+  { image:"/images/James.png", name:"JAMES", result:"Trained for years. A different plan every time. Nothing to show for it until he stopped guessing."},
   { image:"/images/Rylan.png", name:"RYLAN", result:"Found out he was going to be a dad. Realised the version of him then wasn't the one he wanted his daughter to grow up with."},
-  { image:"/images/Sam.png", name:"SAM", result:"Dad of two, plumber, no time. Tried everything for years. Turning 30 was the line in the sand — and he crossed it."}
+  { image:"/images/Sam.png", name:"SAM", result:"Dad of two, plumber, no time. Tried everything for years. Turning 30 was the line in the sand and he crossed it."}
 ];
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
