@@ -75,12 +75,15 @@ const transformations = [
     name: "MARK, 61 — BUSINESS OWNER",
     quote: "At 61 I thought I'd left it too late. Leon adapted everything around my health, kept me accountable every week and gave me a clear plan. My cholesterol dropped significantly, my strength increased every phase and my metabolic age came back at 45."
   },
-  { image:"/images/vlad.png", name:"VLAD", result:"Spent years training without looking like he trained. With structure and accountability he built the lean athletic physique he had always wanted."},
-  { image:"/images/sam.png", name:"SAM", result:"Dad of two. Plumber. Wanted to be in shape for his 30th — lost 20kg and got there."},
+  { image:"/images/Ben.png", name:"BEN", result:"Built the physique he'd been chasing for years."},
+  { image:"/images/Bret.png", name:"BRET", result:"Got holiday-ready."},
+  { image:"/images/Caine.png", name:"CAINE", result:"4 years sober, ran a marathon — signed up the moment he felt himself slipping again."},
+  { image:"/images/Chris.png", name:"CHRIS", result:"Over 50 and prepping for a bodybuilding competition."},
+  { image:"/images/Cobey.png", name:"COBEY", result:"Lost 40kg."},
   { image:"/images/jack.png", name:"JACK", result:"Stopped guessing in the gym and finally built muscle while dropping body fat."},
-  { image:"/images/cobey.png", name:"COBEY", result:"Lost 40kg."},
-  { image:"/images/chris.png", name:"CHRIS", result:"Over 50 and prepping for a bodybuilding competition."},
-  { image:"/images/caine.png", name:"CAINE", result:"4 years sober, ran a marathon — signed up the moment he felt himself slipping again."}
+  { image:"/images/James.png", name:"JAMES", result:"45. Lean and muscular. Joints intact."},
+  { image:"/images/Rylan.png", name:"RYLAN", result:"Lost the weight. Built the muscle."},
+  { image:"/images/Sam.png", name:"SAM", result:"Dad of two. Plumber. Wanted to be in shape for his 30th — lost 20kg and got there."}
 ];
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
