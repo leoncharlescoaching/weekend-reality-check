@@ -229,7 +229,7 @@ export default function LandingPage({ onStart }) {
           <p className="mt-6 text-xl leading-relaxed text-neutral-400">
             That&apos;s not the problem.{" "}
             <span className="font-bold text-white">You&apos;re repeating the same weekend pattern without knowing it</span>{" "}
-            — and nobody&apos;s ever shown you what it actually is. That&apos;s what this does. Built from the same process I use with paying clients. No fluff, no filler.
+           and nobody&apos;s ever shown you what it actually is. That&apos;s what this does. Built from the same process I use with paying clients. No fluff, no filler.
           </p>
         </motion.div>
       </Section>
