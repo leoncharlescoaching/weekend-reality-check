@@ -52,7 +52,7 @@ const deliverables = [
   {
     image: "/images/coaching-breakdown.png",
     title: "What I'd Do If You Were My Client™",
-    description: "How I actually coach — before you spend a penny.",
+    description: "How I actually coach before you spend a penny.",
   },
 ];
 const checklistItems = [
@@ -72,7 +72,7 @@ const steps = [
 const transformations = [
   {
     image: "/images/mark.png",
-    name: "MARK, 61 — BUSINESS OWNER",
+    name: "MARK, 61, BUSINESS OWNER",
     quote: "At 61 I thought I'd left it too late. Leon adapted everything around my health, kept me accountable every week and gave me a clear plan. My cholesterol dropped significantly, my strength increased every phase and my metabolic age came back at 45."
   },
   { image:"/images/Ben.png", name:"BEN", result:"Trained for years. Never had the physique to show for it. Finally built it."},
@@ -109,7 +109,7 @@ export default function LandingPage({ onStart }) {
               EVERY MONDAY<span className="text-[#ff6a00]">™</span>
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
-              Brother — same cycle every weekend, same excuses, same result. Take the free Weekend Reality Check<span className="text-neutral-200">™</span> and find out exactly what&apos;s sabotaging you. Under 2 minutes.
+              Brother... same cycle every weekend, same excuses, same result. Take the free Weekend Reality Check<span className="text-neutral-200">™</span> and find out exactly what&apos;s sabotaging you. Under 2 minutes.
             </p>
             <div className="mt-10">
               <CTAButton onClick={goToRealityCheck} />
