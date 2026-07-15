@@ -75,15 +75,15 @@ const transformations = [
     name: "MARK, 61 — BUSINESS OWNER",
     quote: "At 61 I thought I'd left it too late. Leon adapted everything around my health, kept me accountable every week and gave me a clear plan. My cholesterol dropped significantly, my strength increased every phase and my metabolic age came back at 45."
   },
-  { image:"/images/Ben.png", name:"BEN", result:"Built the physique he'd been chasing for years."},
-  { image:"/images/Bret.png", name:"BRET", result:"Turning 30. Vegas with his girlfriend booked. Wanted to walk in looking the best he ever had."},
-  { image:"/images/Caine.png", name:"CAINE", result:"4 years sober, ran a marathon — signed up the moment he felt himself slipping again."},
-  { image:"/images/Chris.png", name:"CHRIS", result:"Turned 50. Trained his whole life. Decided it was time to step on a bodybuilding stage."},
-  { image:"/images/Cobey.png", name:"COBEY", result:"Overweight and sick of it. Couldn't shift it alone — so he stopped trying to."},
-  { image:"/images/jack.png", name:"JACK", result:"Never seen his own abs. Wanted them before his holiday."},
-  { image:"/images/James.png", name:"JAMES", result:"Trained for years, followed nothing, got nowhere. Needed an actual plan."},
-  { image:"/images/Rylan.png", name:"RYLAN", result:"Found out he was going to be a dad. Decided enough was enough — before his daughter arrived."},
-  { image:"/images/Sam.png", name:"SAM", result:"Dad of two. Plumber. No time, tried everything, nothing worked — until it did. Lost 20kg for his 30th."}
+  { image:"/images/Ben.png", name:"BEN", result:"Trained for years. Never had the physique to show for it. Finally built it."},
+  { image:"/images/Bret.png", name:"BRET", result:"Turning 30. Vegas already booked. Didn't want to be the guy who let himself go before it."},
+  { image:"/images/Caine.png", name:"CAINE", result:"4 years sober. Ran a marathon. Then felt himself slipping again — and didn't let it get any further."},
+  { image:"/images/Chris.png", name:"CHRIS", result:"50 years old, trained his whole life, decided average wasn't good enough anymore. Stepped on a bodybuilding stage."},
+  { image:"/images/Cobey.png", name:"COBEY", result:"Overweight and sick of it. Tried to fix it alone for years. Stopped trying alone."},
+  { image:"/images/jack.png", name:"JACK", result:"Had never seen his own abs. Not once. Wasn't walking into another holiday without them."},
+  { image:"/images/James.png", name:"JAMES", result:"Trained for years. A different plan every time. Nothing to show for it — until he stopped guessing."},
+  { image:"/images/Rylan.png", name:"RYLAN", result:"Found out he was going to be a dad. Realised the version of him then wasn't the one he wanted his daughter to grow up with."},
+  { image:"/images/Sam.png", name:"SAM", result:"Dad of two, plumber, no time. Tried everything for years. Turning 30 was the line in the sand — and he crossed it."}
 ];
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
