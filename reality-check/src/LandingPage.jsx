@@ -76,14 +76,14 @@ const transformations = [
     quote: "At 61 I thought I'd left it too late. Leon adapted everything around my health, kept me accountable every week and gave me a clear plan. My cholesterol dropped significantly, my strength increased every phase and my metabolic age came back at 45."
   },
   { image:"/images/Ben.png", name:"BEN", result:"Built the physique he'd been chasing for years."},
-  { image:"/images/Bret.png", name:"BRET", result:"Got holiday-ready."},
+  { image:"/images/Bret.png", name:"BRET", result:"Turning 30. Vegas with his girlfriend booked. Wanted to walk in looking the best he ever had."},
   { image:"/images/Caine.png", name:"CAINE", result:"4 years sober, ran a marathon — signed up the moment he felt himself slipping again."},
-  { image:"/images/Chris.png", name:"CHRIS", result:"Over 50 and prepping for a bodybuilding competition."},
-  { image:"/images/Cobey.png", name:"COBEY", result:"Lost 40kg."},
-  { image:"/images/jack.png", name:"JACK", result:"Stopped guessing in the gym and finally built muscle while dropping body fat."},
-  { image:"/images/James.png", name:"JAMES", result:"45. Lean and muscular. Joints intact."},
-  { image:"/images/Rylan.png", name:"RYLAN", result:"Lost the weight. Built the muscle."},
-  { image:"/images/Sam.png", name:"SAM", result:"Dad of two. Plumber. Wanted to be in shape for his 30th — lost 20kg and got there."}
+  { image:"/images/Chris.png", name:"CHRIS", result:"Turned 50. Trained his whole life. Decided it was time to step on a bodybuilding stage."},
+  { image:"/images/Cobey.png", name:"COBEY", result:"Overweight and sick of it. Couldn't shift it alone — so he stopped trying to."},
+  { image:"/images/jack.png", name:"JACK", result:"Never seen his own abs. Wanted them before his holiday."},
+  { image:"/images/James.png", name:"JAMES", result:"Trained for years, followed nothing, got nowhere. Needed an actual plan."},
+  { image:"/images/Rylan.png", name:"RYLAN", result:"Found out he was going to be a dad. Decided enough was enough — before his daughter arrived."},
+  { image:"/images/Sam.png", name:"SAM", result:"Dad of two. Plumber. No time, tried everything, nothing worked — until it did. Lost 20kg for his 30th."}
 ];
 export default function LandingPage({ onStart }) {
   const goToRealityCheck = () => {
