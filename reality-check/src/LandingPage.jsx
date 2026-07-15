@@ -28,7 +28,7 @@ function Section({ className = "", children }) {
   );
 }
 const trustItems = [
-  "Under 2 minutes",
+  "Under 60 seconds",
   "Personalised coaching breakdown",
   "Built from real client coaching",
   "Completely free",
@@ -64,7 +64,7 @@ const checklistItems = [
   "You want something that works for good, not just two weeks.",
 ];
 const steps = [
-  "Take the Weekend Reality Check™. Under two minutes.",
+  "Take the Weekend Reality Check™. Under 60 seconds.",
   "Get your personalised coaching breakdown.",
   "See exactly what I'd change first if you were my client.",
   "Stop repeating the same weekend. Start fixing it.",
@@ -109,7 +109,7 @@ export default function LandingPage({ onStart }) {
               EVERY MONDAY<span className="text-[#ff6a00]">™</span>
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
-              Brother... same cycle every weekend, same excuses, same result. Take the free Weekend Reality Check<span className="text-neutral-200">™</span> and find out exactly what&apos;s sabotaging you. Under 2 minutes.
+              Brother... same cycle every weekend, same excuses, same result. Take the free Weekend Reality Check<span className="text-neutral-200">™</span> and find out exactly what&apos;s sabotaging you. Under 60 seconds.
             </p>
             <div className="mt-10">
               <CTAButton onClick={goToRealityCheck} />
