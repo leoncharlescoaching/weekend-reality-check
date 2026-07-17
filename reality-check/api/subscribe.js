@@ -86,17 +86,32 @@ export default async function handler(req, res) {
 
     if (!mcRes.ok) {
       console.error("Mailchimp error:", data);
-      return res
-        .status(500)
-        .json({ error: "Could not save your details. Please try again." });
+      // TEMPORARY DEBUG STEP: surfacing Mailchimp's actual rejection
+      // reason (data.detail) in the response so it shows up in the app's
+      // error message instead of the generic text — this is the fastest
+      // way to see *why* it's failing without digging through hosting
+      // logs. Once the real cause is found and fixed, put the generic
+      // message back (see the two lines commented out below) so end
+      // users never see raw API errors.
+      return res.status(500).json({
+        error: `Mailchimp says: ${data.detail || data.title || "unknown error"}`,
+      });
+      // return res
+      //   .status(500)
+      //   .json({ error: "Could not save your details. Please try again." });
     }
 
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error("Mailchimp request failed:", err);
-    return res
-      .status(500)
-      .json({ error: "Could not save your details. Please try again." });
+    // Same temporary debug approach for outright request failures (bad
+    // credentials, DNS, network, etc.) — see note above.
+    return res.status(500).json({
+      error: `Request failed: ${err.message || "unknown error"}`,
+    });
+    // return res
+    //   .status(500)
+    //   .json({ error: "Could not save your details. Please try again." });
   }
 }
 
