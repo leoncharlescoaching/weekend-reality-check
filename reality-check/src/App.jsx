@@ -22,8 +22,16 @@ const QUESTION_TYPES = ["number", "choice", "height", "weight"];
 
 export default function App() {
   const flow = useMemo(() => buildFlow(), []);
-  const [stepIndex, setStepIndex] = useLocalStorage("rc_step", 1);
-  const [answers, setAnswers] = useLocalStorage("rc_answers", {});
+  // Quiz progress is deliberately NOT persisted to localStorage anymore.
+  // It used to be (via useLocalStorage), which meant that once a visitor
+  // reached any screen past the landing page, that screen got locked into
+  // their browser and every future visit resumed there instead of
+  // starting fresh — including a permanent "stuck" state if they closed
+  // the tab mid-quiz. Plain useState means every fresh page load always
+  // starts at the landing screen. unitSystem (metric/imperial) is a real
+  // user preference, not quiz progress, so that one still persists.
+  const [stepIndex, setStepIndex] = useState(1);
+  const [answers, setAnswers] = useState({});
   const [unitSystem, setUnitSystem] = useLocalStorage("rc_units", "metric");
   const [direction, setDirection] = useState(1);
 
