@@ -34,15 +34,8 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Server misconfigured" });
   }
 
-  // NOTE: deliberately NOT sending `name` on to Mailchimp as merge_fields
-  // (FNAME/LNAME). Mailchimp rejects the *entire* request if you send a
-  // merge tag that isn't defined on the Audience, and not every Audience
-  // has FNAME/LNAME set up. `name` is still collected on the form (the app
-  // itself can use it), it's just not forwarded to Mailchimp. If you want
-  // it stored there too, add FNAME and LNAME as merge fields in
-  // Audience > Settings > Audience fields and *merge tags* first, then
-  // send merge_fields: { FNAME, LNAME } in the body below.
-  void name;
+  const [firstName = "", ...rest] = (name || "").trim().split(" ");
+  const lastName = rest.join(" ");
 
   // Mailchimp identifies members by the MD5 hash of their lowercased email.
   // PUTting to that hash is an upsert: brand-new emails get created,
@@ -62,25 +55,51 @@ export default async function handler(req, res) {
     .update(email.trim().toLowerCase())
     .digest("hex");
 
-  try {
-    const mcRes = await fetch(
-      `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Basic ${Buffer.from(
-            `anystring:${API_KEY}`
-          ).toString("base64")}`,
-        },
-        body: JSON.stringify({
-          email_address: email.trim(),
-          status_if_new: "subscribed",
-        }),
-      }
-    );
+  const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
+  const authHeader = `Basic ${Buffer.from(`anystring:${API_KEY}`).toString(
+    "base64"
+  )}`;
 
+  async function putMember(includeName) {
+    const body = {
+      email_address: email.trim(),
+      status_if_new: "subscribed",
+    };
+    if (includeName) {
+      body.merge_fields = { FNAME: firstName, LNAME: lastName };
+    }
+    const mcRes = await fetch(url, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json", Authorization: authHeader },
+      body: JSON.stringify(body),
+    });
     const data = await mcRes.json();
+    return { mcRes, data };
+  }
+
+  try {
+    // Send the name as FNAME/LNAME merge fields first — that's how it
+    // actually gets saved in Mailchimp. If your Audience doesn't have
+    // those merge fields configured, Mailchimp rejects the whole request
+    // (title "Invalid Resource", with an errors[] entry pointing at
+    // merge_fields) — in that case, retry once without the name rather
+    // than blocking the submission entirely, so the lead is still
+    // captured even though the name isn't. To actually fix that instead
+    // of just working around it: Audience > Settings > Audience fields
+    // and *merge tags* > add FNAME and LNAME.
+    let { mcRes, data } = await putMember(true);
+
+    if (
+      !mcRes.ok &&
+      (data.title === "Invalid Resource" ||
+        (Array.isArray(data.errors) &&
+          data.errors.some((e) => e.field?.startsWith("merge_fields"))))
+    ) {
+      console.warn(
+        "Mailchimp rejected merge_fields (FNAME/LNAME likely not set up on this Audience) — retrying without the name. Add FNAME/LNAME as merge fields in Audience > Settings to capture names going forward."
+      );
+      ({ mcRes, data } = await putMember(false));
+    }
 
     if (!mcRes.ok) {
       // Mailchimp permanently blocks re-adding a contact who was
