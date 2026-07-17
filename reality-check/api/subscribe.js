@@ -11,6 +11,8 @@
 //   MAILCHIMP_SERVER_PREFIX — the bit after the dash in your API key, e.g.
 //                             if your key ends "-us21" this is "us21"
 
+import crypto from "crypto";
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -35,11 +37,31 @@ export default async function handler(req, res) {
   const [firstName = "", ...rest] = (name || "").trim().split(" ");
   const lastName = rest.join(" ");
 
+  // Mailchimp identifies members by the MD5 hash of their lowercased email.
+  // PUTting to that hash is an upsert: brand-new emails get created,
+  // emails already on the list just get their merge fields refreshed —
+  // neither path errors. This replaces the old POST-based approach, which
+  // always failed for existing subscribers and relied on string-matching
+  // Mailchimp's error title ("Member Exists") to paper over it — a check
+  // that silently stopped working for anyone whose failure looked slightly
+  // different (previously unsubscribed, archived, etc.), blocking them on
+  // the email screen. Upserting removes the whole failure class instead of
+  // patching around it.
+  //
+  // `status_if_new` only applies when Mailchimp is creating a brand-new
+  // member — it's deliberately not sent as `status`, so an existing
+  // member's current subscription state (including a genuine unsubscribe)
+  // is never silently overwritten.
+  const subscriberHash = crypto
+    .createHash("md5")
+    .update(email.trim().toLowerCase())
+    .digest("hex");
+
   try {
     const mcRes = await fetch(
-      `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`,
+      `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Basic ${Buffer.from(
@@ -47,8 +69,8 @@ export default async function handler(req, res) {
           ).toString("base64")}`,
         },
         body: JSON.stringify({
-          email_address: email,
-          status: "subscribed",
+          email_address: email.trim(),
+          status_if_new: "subscribed",
           merge_fields: {
             FNAME: firstName,
             LNAME: lastName,
@@ -59,11 +81,7 @@ export default async function handler(req, res) {
 
     const data = await mcRes.json();
 
-    // Mailchimp returns 400 "Member Exists" if this email is already on
-    // the list. Treat that as success — a returning user shouldn't get
-    // blocked from seeing their results just because they've submitted
-    // the form before.
-    if (!mcRes.ok && data.title !== "Member Exists") {
+    if (!mcRes.ok) {
       console.error("Mailchimp error:", data);
       return res
         .status(500)
