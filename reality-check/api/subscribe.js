@@ -37,23 +37,21 @@ export default async function handler(req, res) {
   // NOTE: deliberately NOT sending `name` on to Mailchimp as merge_fields
   // (FNAME/LNAME). Mailchimp rejects the *entire* request if you send a
   // merge tag that isn't defined on the Audience, and not every Audience
-  // has FNAME/LNAME set up — that mismatch is the likely cause if you were
-  // seeing "Could not save your details" on every submission. `name` is
-  // still collected on the form (ManyChat/the app can use it), it's just
-  // not forwarded to Mailchimp. If you want it stored there too, add FNAME
-  // and LNAME as merge fields in Audience > Settings > Audience fields and
-  // *merge tags* first, then send merge_fields: { FNAME, LNAME } below.
+  // has FNAME/LNAME set up. `name` is still collected on the form (the app
+  // itself can use it), it's just not forwarded to Mailchimp. If you want
+  // it stored there too, add FNAME and LNAME as merge fields in
+  // Audience > Settings > Audience fields and *merge tags* first, then
+  // send merge_fields: { FNAME, LNAME } in the body below.
+  void name;
 
   // Mailchimp identifies members by the MD5 hash of their lowercased email.
   // PUTting to that hash is an upsert: brand-new emails get created,
-  // emails already on the list just get their merge fields refreshed —
-  // neither path errors. This replaces the old POST-based approach, which
-  // always failed for existing subscribers and relied on string-matching
+  // emails already on the list just get touched/refreshed — neither path
+  // errors. This replaces an earlier POST-based approach, which always
+  // failed for existing subscribers and relied on string-matching
   // Mailchimp's error title ("Member Exists") to paper over it — a check
-  // that silently stopped working for anyone whose failure looked slightly
-  // different (previously unsubscribed, archived, etc.), blocking them on
-  // the email screen. Upserting removes the whole failure class instead of
-  // patching around it.
+  // that silently stopped working for anyone whose failure looked
+  // slightly different, blocking them on the email screen.
   //
   // `status_if_new` only applies when Mailchimp is creating a brand-new
   // member — it's deliberately not sent as `status`, so an existing
@@ -85,33 +83,34 @@ export default async function handler(req, res) {
     const data = await mcRes.json();
 
     if (!mcRes.ok) {
+      // Mailchimp permanently blocks re-adding a contact who was
+      // "forgotten" (GDPR erasure / permanent deletion) via the API —
+      // that's intentional on Mailchimp's side, not a bug, and no request
+      // format works around it. They have to manually resubscribe through
+      // a real opt-in form for Mailchimp to accept verifiable consent
+      // again. Since this gate exists to let someone see their own quiz
+      // results (not to guarantee they land in Mailchimp), don't let that
+      // block them — let them through, just without being added to the
+      // list, and log it so it's visible if you want to follow up.
+      if (data.title === "Forgotten Email Not Subscribed") {
+        console.warn(
+          `Mailchimp: ${email} was permanently deleted and could not be re-added via API. Letting them continue anyway.`
+        );
+        return res.status(200).json({ ok: true, mailchimp: "skipped_forgotten" });
+      }
+
       console.error("Mailchimp error:", data);
-      // TEMPORARY DEBUG STEP: surfacing Mailchimp's actual rejection
-      // reason (data.detail) in the response so it shows up in the app's
-      // error message instead of the generic text — this is the fastest
-      // way to see *why* it's failing without digging through hosting
-      // logs. Once the real cause is found and fixed, put the generic
-      // message back (see the two lines commented out below) so end
-      // users never see raw API errors.
-      return res.status(500).json({
-        error: `Mailchimp says: ${data.detail || data.title || "unknown error"}`,
-      });
-      // return res
-      //   .status(500)
-      //   .json({ error: "Could not save your details. Please try again." });
+      return res
+        .status(500)
+        .json({ error: "Could not save your details. Please try again." });
     }
 
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error("Mailchimp request failed:", err);
-    // Same temporary debug approach for outright request failures (bad
-    // credentials, DNS, network, etc.) — see note above.
-    return res.status(500).json({
-      error: `Request failed: ${err.message || "unknown error"}`,
-    });
-    // return res
-    //   .status(500)
-    //   .json({ error: "Could not save your details. Please try again." });
+    return res
+      .status(500)
+      .json({ error: "Could not save your details. Please try again." });
   }
 }
 
