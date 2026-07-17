@@ -39,17 +39,19 @@ export default async function handler(req, res) {
 
   // Mailchimp identifies members by the MD5 hash of their lowercased email.
   // PUTting to that hash is an upsert: brand-new emails get created,
-  // emails already on the list just get touched/refreshed — neither path
-  // errors. This replaces an earlier POST-based approach, which always
-  // failed for existing subscribers and relied on string-matching
-  // Mailchimp's error title ("Member Exists") to paper over it — a check
-  // that silently stopped working for anyone whose failure looked
-  // slightly different, blocking them on the email screen.
+  // emails already on the list get updated — neither path errors. This
+  // replaces an earlier POST-based approach, which always failed for
+  // existing subscribers and relied on string-matching Mailchimp's error
+  // title ("Member Exists") to paper over it — a check that silently
+  // stopped working for anyone whose failure looked slightly different,
+  // blocking them on the email screen.
   //
-  // `status_if_new` only applies when Mailchimp is creating a brand-new
-  // member — it's deliberately not sent as `status`, so an existing
-  // member's current subscription state (including a genuine unsubscribe)
-  // is never silently overwritten.
+  // Sent as `status: "subscribed"` (not just `status_if_new`) so someone
+  // who previously unsubscribed and is now deliberately filling in this
+  // form again actually gets resubscribed. Submitting the form is itself
+  // an active opt-in action, so treating it as fresh consent is correct
+  // here — this is different from silently re-adding someone in the
+  // background without them taking any action.
   const subscriberHash = crypto
     .createHash("md5")
     .update(email.trim().toLowerCase())
@@ -63,7 +65,7 @@ export default async function handler(req, res) {
   async function putMember(includeName) {
     const body = {
       email_address: email.trim(),
-      status_if_new: "subscribed",
+      status: "subscribed",
     };
     if (includeName) {
       body.merge_fields = { FNAME: firstName, LNAME: lastName };
