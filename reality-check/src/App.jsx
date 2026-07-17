@@ -96,11 +96,10 @@ export default function App() {
     return null;
   }
 
-  // Testing convenience — shows on every screen so you're never stuck
-  // mid-flow with no way back to the start (localStorage persists
-  // rc_step/rc_answers across reloads, which is otherwise invisible
-  // and confusing when testing). Wired to the existing restart() so it's
-  // an instant state reset, not a hard page reload.
+  // Shows on every screen so there's always a fast way back to the start
+  // — useful mid-quiz for real visitors, not just while testing. Wired to
+  // the existing restart() so it's an instant state reset, not a hard
+  // page reload.
   const resetButton = (
     <button
       type="button"
