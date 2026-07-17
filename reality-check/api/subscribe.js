@@ -34,8 +34,15 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Server misconfigured" });
   }
 
-  const [firstName = "", ...rest] = (name || "").trim().split(" ");
-  const lastName = rest.join(" ");
+  // NOTE: deliberately NOT sending `name` on to Mailchimp as merge_fields
+  // (FNAME/LNAME). Mailchimp rejects the *entire* request if you send a
+  // merge tag that isn't defined on the Audience, and not every Audience
+  // has FNAME/LNAME set up — that mismatch is the likely cause if you were
+  // seeing "Could not save your details" on every submission. `name` is
+  // still collected on the form (ManyChat/the app can use it), it's just
+  // not forwarded to Mailchimp. If you want it stored there too, add FNAME
+  // and LNAME as merge fields in Audience > Settings > Audience fields and
+  // *merge tags* first, then send merge_fields: { FNAME, LNAME } below.
 
   // Mailchimp identifies members by the MD5 hash of their lowercased email.
   // PUTting to that hash is an upsert: brand-new emails get created,
@@ -71,10 +78,6 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           email_address: email.trim(),
           status_if_new: "subscribed",
-          merge_fields: {
-            FNAME: firstName,
-            LNAME: lastName,
-          },
         }),
       }
     );
